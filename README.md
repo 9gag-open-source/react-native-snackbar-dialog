@@ -98,6 +98,7 @@ Once a dismiss is triggered, it will show the next message in the queue.
 ### Example
 
 ```jsx
+import { View, Text } from 'react-native'
 import SnackBar from 'react-native-snackbar-dialog'
 import connect from 'react-redux'
 
@@ -111,13 +112,9 @@ function RootContainer ({ snack, add, show, dismiss }) {
 
   return (
     <View>
-      <Text onPress={() => add(item)}>
-        Enqueue it if current item is on screen
-      </Text>
-      <Text onPress={() => show(item)}>
-        Show it NOW
-      </Text>
-      { snack && <SnackBar onDismiss={dismiss} {...snack} /> }
+      <Text onPress={() => add(item)}>Enqueue</Text>
+      <Text onPress={() => show(item)}>Show</Text>
+      { snack && <SnackBar {...snack} /> }
     </View>
   )
 }

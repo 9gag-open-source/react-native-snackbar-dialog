@@ -60,6 +60,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 18
+  },
+
+  flat: {
+    fontSize: 14,
+    marginHorizontal: 16
   }
 })
 
@@ -209,14 +214,12 @@ export default class SnackBar extends Component {
     const titleElement = <Text style={[styles.text, { color: textColor }]}>{children}</Text>
 
     if (confirmText && cancelText) {
-      const flatStyles = { fontSize: 14, marginHorizontal: 16 }
-
       return (
         <View>
           {titleElement}
           <View style={styles.actionRow}>
-            { this.renderButton(cancelText, onCancel, flatStyles) }
-            { this.renderButton(confirmText, onConfirm, flatStyles) }
+            { this.renderButton(cancelText, onCancel, styles.flat) }
+            { this.renderButton(confirmText, onConfirm, styles.flat) }
           </View>
         </View>
       )
