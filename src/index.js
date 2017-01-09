@@ -2,6 +2,8 @@
 
 import React, { Component, PropTypes } from 'react'
 import Timer from 'react-native-timer'
+import * as actions from './actions'
+import reducer from './reducer'
 
 import {
   View,
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   inlineText: {
-    fontSize: 16,
+    fontSize: 16
   },
 
   button: {
@@ -62,6 +64,9 @@ const styles = StyleSheet.create({
 })
 
 export default class SnackBar extends Component {
+  static actions = actions
+  static reducer = reducer
+
   static propTypes = {
     // Display message
     children: PropTypes.string.isRequired,
@@ -71,7 +76,7 @@ export default class SnackBar extends Component {
     onConfirm: PropTypes.func,
     cancelText: PropTypes.string,
     onCancel: PropTypes.func,
-    
+
     // Style override
     style: PropTypes.object,
     backgroundColor: PropTypes.string,
@@ -202,7 +207,7 @@ export default class SnackBar extends Component {
     } = this.props
 
     const titleElement = <Text style={[styles.text, { color: textColor }]}>{children}</Text>
-    
+
     if (confirmText && cancelText) {
       const flatStyles = { fontSize: 14, marginHorizontal: 16 }
 
