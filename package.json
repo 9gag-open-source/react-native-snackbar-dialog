@@ -49,6 +49,7 @@
     "babel-eslint": "^7.1.1",
     "babel-plugin-transform-flow-strip-types": "^6.21.0",
     "flow-bin": "^0.37.4",
+    "jest": "^18.1.0",
     "standard": "^8.6.0"
   }
 }
