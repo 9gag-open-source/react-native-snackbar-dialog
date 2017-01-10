@@ -103,16 +103,22 @@ import SnackBar from 'react-native-snackbar-dialog'
 import connect from 'react-redux'
 
 function RootContainer ({ snack, add, show, dismiss }) {
-  const item = {
+  const inlineItem = {
     title: 'Making the world happier',
     confirmText='Learn more'
     onConfirm={() => { console.log('Thank you') }}
   }
 
+  const dialogItem = {
+    ...inlineItem,
+    cancelText='No thanks'
+    onCancel={() => { console.log('Hope to see you again') }}
+  }
+
   return (
     <View>
-      <Text onPress={() => add(item)}>Enqueue</Text>
-      <Text onPress={() => show(item)}>Show</Text>
+      <Text onPress={() => add(inlineItem)}>Enqueue</Text>
+      <Text onPress={() => show(dialogItem)}>Show</Text>
       { snack && <SnackBar {...snack} onDismiss={dismiss} /> }
     </View>
   )
