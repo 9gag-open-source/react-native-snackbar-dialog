@@ -121,8 +121,6 @@ export default class SnackBar extends Component {
   }
 
   componentDidMount () {
-    const { isStatic, duration } = this.props
-
     this.show()
   }
 
@@ -139,7 +137,7 @@ export default class SnackBar extends Component {
 
     const isPropsChanged = (
       children !== nextProps.children ||
-      confirmText !== nextProps.confirmText || 
+      confirmText !== nextProps.confirmText ||
       cancelText !== nextProps.cancelText
     )
 
