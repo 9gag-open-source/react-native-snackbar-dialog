@@ -22,39 +22,25 @@ yarn add react-native-snackbar-dialog
 import SnackBar from 'react-native-snackbar-dialog'
 ```
 
-A SnackBar that will disappear after 5 seconds with `onDismiss` callback.
-```jsx
-<SnackBar onDismiss={() => { console.log('Good Bye!) }}>
-  Making the world happier
-</SnackBar>
-```
-
-Render without auto disappearing.
+Render inline always shows SnackBar without any buttons.
 ```jsx
 <SnackBar isStatic>
   Making the world happier
 </SnackBar>
 ```
 
-Explictly set the duration to disappear.
-```jsx
-<SnackBar duration={8000}>
-  Making the world happier
-</SnackBar>
-```
-
-Controlling the show/hide logic with the `onDismiss` callback.
+Controlling the show/hide logic with the `onAutoDismiss` callback with 8 seconds duration (default: 5 seconds).
 ```jsx
 {
   this.props.showSnackBar && (
-    <SnackBar duration={8000} onDismiss={this.props.onSnackBarClose}>
+    <SnackBar duration={8000} onAutoDismiss={this.props.onSnackBarClose}>
       Making the world happier
     </SnackBar>
   )
 }
 ```
 
-An inline SnackBar.
+An inline SnackBar with an action button.
 ```jsx
 <SnackBar confirmText='Learn more' onConfirm={() => { console.log('Thank you') }}>
   Making the world happier
@@ -98,7 +84,8 @@ This library can be integrated with any Redux applications to handle messages to
 <br />Some operations like taking a screenshot require the message to show immediately. Using this method will not change the queue order.
 
 - `SnackBar.actions.dismiss()`
-<br />Adding this action to the props `onDismiss` in root container tells Redux to dequeue the next item according to priority. Every `onConfirm` and `onCancel` props action will trigger `onDismiss` callback.
+<br />Adding this action to the props `onAutoDismiss` in root container tells Redux to dequeue the next item according to priority.
+Or adding it manually to `onConfirm` and `onCancel` props action to control the flow of show/hide.
 
 ### Example
 
@@ -107,35 +94,32 @@ import { View, Text } from 'react-native'
 import SnackBar from 'react-native-snackbar-dialog'
 import connect from 'react-redux'
 
-function RootContainer ({ snack, add, show, dismiss }) {
-  const onConfirm = () => {
-    console.log('Thank you')
-    dismiss()
-  }
-
-  const onCancel = () => {
-    console.log('Hope to see you again')
-    dismiss()
-  }
-
+function RootContainer ({ snack, addSnack, showSnack, dismissSnack }) {
   const inlineItem = {
     title: 'Making the world happier',
     confirmText: 'Learn more',
-    onConfirm,
+    onConfirm: () => {
+      dismissSnack()
+      console.log('Thank you')
+    },
     duration: 10000
   }
 
   const dialogItem = {
     ...inlineItem,
-    cancelText: 'No thanks'
-    onCancel
+    cancelText: 'No thanks',
+    onCancel: () => {
+      // Dispatching a new StackBar action when clicking cancel
+      // Need not to use `dismissSnack` here since the `showSnack` will replace current active item
+      showSnack(inlineItem)
+    }
   }
 
   return (
     <View>
-      <Text onPress={() => add(inlineItem)}>Enqueue</Text>
-      <Text onPress={() => show(dialogItem)}>Show</Text>
-      { snack && <SnackBar {...snack} /> }
+      <Text onPress={() => addSnack(inlineItem)}>Enqueue</Text>
+      <Text onPress={() => showSnack(dialogItem)}>Show</Text>
+      { snack && <SnackBar {...snack} onAutoDismiss={dismissSnack} /> }
     </View>
   )
 }

@@ -90,7 +90,7 @@ export default class SnackBar extends Component {
     textColor: PropTypes.string,
 
     // Control the dismiss behaviour
-    onDismiss: PropTypes.func,
+    onAutoDismiss: PropTypes.func,
     fadeOutDuration: PropTypes.number,
     duration: PropTypes.number,
     isStatic: PropTypes.bool
@@ -100,7 +100,7 @@ export default class SnackBar extends Component {
     fadeOutDuration: DEFAULT_FADEOUT_DURATION,
     onConfirm: () => {},
     onCancel: () => {},
-    onDismiss: () => {},
+    onAutoDismiss: () => {},
     duration: DEFAULT_DURATION,
     isStatic: false,
 
@@ -123,31 +123,41 @@ export default class SnackBar extends Component {
   componentDidMount () {
     const { isStatic, duration } = this.props
 
-    this.show(() => {
-      if (isStatic) {
-        return
-      }
-
-      InteractionManager.runAfterInteractions(() => {
-        Timer.setTimeout(TIMEOUT_ID, () => {
-          this.hide()
-        }, duration)
-      })
-    })
+    this.show()
   }
 
   componentWillUnmount () {
     this.hide()
   }
 
-  show = (callback: () => {}) => {
+  componentWillReceiveProps (nextProps) {
+    const {
+      children,
+      confirmText,
+      cancelText
+    } = this.props
+
+    const isPropsChanged = (
+      children !== nextProps.children ||
+      confirmText !== nextProps.confirmText || 
+      cancelText !== nextProps.cancelText
+    )
+
+    if (isPropsChanged) {
+      this.show()
+    }
+  }
+
+  show = () => {
     const {
       transformOpacity,
       transformOffsetY
     } = this.state
 
     const {
-      fadeOutDuration
+      fadeOutDuration,
+      isStatic,
+      duration
     } = this.props
 
     Animated.parallel([
@@ -161,7 +171,17 @@ export default class SnackBar extends Component {
         duration: fadeOutDuration,
         easing: Easing.inOut(Easing.quad)
       })
-    ]).start(callback)
+    ]).start(() => {
+      if (isStatic) {
+        return
+      }
+
+      InteractionManager.runAfterInteractions(() => {
+        Timer.setTimeout(TIMEOUT_ID, () => {
+          this.hide()
+        }, duration)
+      })
+    })
   }
 
   hide = () => {
@@ -172,7 +192,7 @@ export default class SnackBar extends Component {
 
     const {
       fadeOutDuration,
-      onDismiss
+      onAutoDismiss
     } = this.props
 
     Animated.parallel([
@@ -187,14 +207,11 @@ export default class SnackBar extends Component {
         easing: Easing.inOut(Easing.quad),
         duration: fadeOutDuration
       })
-    ]).start(() => onDismiss())
+    ]).start(() => onAutoDismiss())
   }
 
   renderButton = (text, onPress: () => {}, style) => {
-    const {
-      buttonColor,
-      onDismiss
-    } = this.props
+    const { buttonColor } = this.props
 
     return (
       <TouchableOpacity hitSlop={HIT_SLOP} onPress={onPress}>
