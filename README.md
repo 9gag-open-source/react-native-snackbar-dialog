@@ -43,17 +43,25 @@ Explictly set the duration to disappear.
 </SnackBar>
 ```
 
+Controlling the show/hide logic with the `onDismiss` callback.
+```jsx
+{
+  this.props.showSnackBar && (
+    <SnackBar duration={8000} onDismiss={this.props.onSnackBarClose}>
+      Making the world happier
+    </SnackBar>
+  )
+}
+```
+
 An inline SnackBar.
 ```jsx
-<SnackBar
-  confirmText='Learn more'
-  onConfirm={() => { console.log('Thank you') }}
->
+<SnackBar confirmText='Learn more' onConfirm={() => { console.log('Thank you') }}>
   Making the world happier
 </SnackBar>
 ```
 
-A dialog with separated row display.
+A SnackBar dialog with separated row action button display.
 ```jsx
 <SnackBar
   confirmText='Learn more'
@@ -81,19 +89,16 @@ A SnackBar with confirgurable style.
 
 This library can be integrated with any Redux applications to handle messages to be displayed with proper order.
 
-### Usages
+### Actions
 
-> SnackBar.actions.add(item)
+- `SnackBar.actions.add(item)`
+<br />If there isn't any items in the Store, it will show it immediately. Otherwise, it will enqueue and show it accordingly when the `dismiss` function is triggered.
 
-If there isn't any items in the Store, it will show it immediately. Otherwise, it will enqueue and show it accordingly when the `dismiss` function is triggered.
+- `SnackBar.actions.show(item)`
+<br />Some operations like taking a screenshot require the message to show immediately. Using this method will not change the queue order.
 
-> SnackBar.actions.show(item)
-
-Some operations like taking a screenshot require the message to show immediately. Using this method will not change the queue order.
-
-> SnackBar.actions.dismiss()
-
-Adding this action to the props `onDismiss` in root container tells Redux to dequeue the next item according to priority. Every `onConfirm` and `onCancel` props action will trigger `onDismiss` callback.
+- `SnackBar.actions.dismiss()`
+<br />Adding this action to the props `onDismiss` in root container tells Redux to dequeue the next item according to priority. Every `onConfirm` and `onCancel` props action will trigger `onDismiss` callback.
 
 ### Example
 
@@ -103,23 +108,34 @@ import SnackBar from 'react-native-snackbar-dialog'
 import connect from 'react-redux'
 
 function RootContainer ({ snack, add, show, dismiss }) {
+  const onConfirm = () => {
+    console.log('Thank you')
+    dismiss()
+  }
+
+  const onCancel = () => {
+    console.log('Hope to see you again')
+    dismiss()
+  }
+
   const inlineItem = {
     title: 'Making the world happier',
-    confirmText='Learn more'
-    onConfirm={() => { console.log('Thank you') }}
+    confirmText: 'Learn more',
+    onConfirm,
+    duration: 10000
   }
 
   const dialogItem = {
     ...inlineItem,
-    cancelText='No thanks'
-    onCancel={() => { console.log('Hope to see you again') }}
+    cancelText: 'No thanks'
+    onCancel
   }
 
   return (
     <View>
       <Text onPress={() => add(inlineItem)}>Enqueue</Text>
       <Text onPress={() => show(dialogItem)}>Show</Text>
-      { snack && <SnackBar {...snack} onDismiss={dismiss} /> }
+      { snack && <SnackBar {...snack} /> }
     </View>
   )
 }
