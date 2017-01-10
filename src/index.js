@@ -197,13 +197,7 @@ export default class SnackBar extends Component {
     } = this.props
 
     return (
-      <TouchableOpacity
-        hitSlop={HIT_SLOP}
-        onPress={() => {
-          onPress()
-          onDismiss()
-        }}
-      >
+      <TouchableOpacity hitSlop={HIT_SLOP} onPress={onPress}>
         <Text style={[styles.button, style, { color: buttonColor }]}>
           {text}
         </Text>
