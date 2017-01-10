@@ -22,6 +22,7 @@ const INITIAL_POSITION: number = -180
 
 const STYLE_BANNER_COLOR: string = '#000000'
 const TEXT_COLOR_ACCENT: string = '#0088ff'
+const HIT_SLOP = { top: 8, bottom: 8, left: 8, right: 8 }
 
 const TIMEOUT_ID: string = 'snackBar'
 
@@ -190,10 +191,19 @@ export default class SnackBar extends Component {
   }
 
   renderButton = (text, onPress: () => {}, style) => {
-    const { buttonColor } = this.props
+    const {
+      buttonColor,
+      onDismiss
+    } = this.props
 
     return (
-      <TouchableOpacity hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }} onPress={onPress}>
+      <TouchableOpacity
+        hitSlop={HIT_SLOP}
+        onPress={() => {
+          onPress()
+          onDismiss()
+        }}
+      >
         <Text style={[styles.button, style, { color: buttonColor }]}>
           {text}
         </Text>

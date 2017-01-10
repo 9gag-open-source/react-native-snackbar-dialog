@@ -85,7 +85,7 @@ This library can be integrated with any Redux applications to handle messages to
 
 > SnackBar.actions.add(item)
 
-If there isn't any items in the Store, it will show it immediately. Otherwise, it will enqueue and show it accordingly when `dismiss` is triggered.
+If there isn't any items in the Store, it will show it immediately. Otherwise, it will enqueue and show it accordingly when the `dismiss` function is triggered.
 
 > SnackBar.actions.show(item)
 
@@ -93,7 +93,7 @@ Some operations like taking a screenshot require the message to show immediately
 
 > SnackBar.actions.dismiss()
 
-Once a dismiss is triggered, it will show the next message in the queue.
+Adding this action to the props `onDismiss` in root container tells Redux to dequeue the next item according to priority. Every `onConfirm` and `onCancel` props action will trigger `onDismiss` callback.
 
 ### Example
 
@@ -104,17 +104,16 @@ import connect from 'react-redux'
 
 function RootContainer ({ snack, add, show, dismiss }) {
   const item = {
-    children: 'Making the world happier',
+    title: 'Making the world happier',
     confirmText='Learn more'
     onConfirm={() => { console.log('Thank you') }}
-    onDismiss={dismiss}
   }
 
   return (
     <View>
       <Text onPress={() => add(item)}>Enqueue</Text>
       <Text onPress={() => show(item)}>Show</Text>
-      { snack && <SnackBar {...snack} /> }
+      { snack && <SnackBar {...snack} onDismiss={dismiss} /> }
     </View>
   )
 }
