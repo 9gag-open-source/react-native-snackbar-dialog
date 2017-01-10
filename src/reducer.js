@@ -9,24 +9,47 @@ const INITIAL_STATE = {
   current: null
 }
 
+function transformProps (item) {
+  const { title } = item
+  const transformedItem = Object.assign({}, item)
+
+  if (title) {
+    transformedItem.children = title
+  }
+
+  return transformedItem
+}
+
 function show (state, payload) {
   return {
     ...state,
-    current: Object.assign({}, payload)
+    current: transformProps(payload)
   }
 }
 
 function add (state, payload) {
+  const item = transformProps(payload)
+
+  if (!state.current && state.items.length) {
+    const [current, ...items] = state.items
+
+    return {
+      ...state,
+      items: items.concat([item]),
+      current
+    }
+  }
+
   if (!state.current) {
     return {
       ...state,
-      current: Object.assign({}, payload)
+      current: item
     }
   }
 
   return {
     ...state,
-    items: state.items.concat([payload])
+    items: state.items.concat([item])
   }
 }
 
