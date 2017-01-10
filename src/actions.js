@@ -1,6 +1,6 @@
-export const ADD: string = 'ADD'
-export const SHOW: string = 'SHOW'
-export const DISMISS: string = 'DISMISS'
+export const ADD: string = 'SNACKBAR.ADD'
+export const SHOW: string = 'SNACKBAR.SHOW'
+export const DISMISS: string = 'SNACKBAR.DISMISS'
 
 export function add (item) {
   return {
