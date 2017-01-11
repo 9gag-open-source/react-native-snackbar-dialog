@@ -1,9 +1,11 @@
-/* @flow */
+// @flow
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import Timer from 'react-native-timer'
+
 import * as actions from './actions'
 import reducer from './reducer'
+import type { SnackItemType } from './type'
 
 import {
   View,
@@ -70,48 +72,35 @@ const styles = StyleSheet.create({
 })
 
 export default class SnackBar extends Component {
+  state: {
+    transformOffsetY: any,
+    transformOpacity: any
+  }
+
+  props: SnackItemType
+
   static actions = actions
   static reducer = reducer
 
-  static propTypes = {
-    // Display message
-    children: PropTypes.string.isRequired,
-
-    // Primary and secondary buttons
-    confirmText: PropTypes.string,
-    onConfirm: PropTypes.func,
-    cancelText: PropTypes.string,
-    onCancel: PropTypes.func,
-
-    // Style override
-    style: PropTypes.object,
-    backgroundColor: PropTypes.string,
-    buttonColor: PropTypes.string,
-    textColor: PropTypes.string,
-
-    // Control the dismiss behaviour
-    onAutoDismiss: PropTypes.func,
-    fadeOutDuration: PropTypes.number,
-    duration: PropTypes.number,
-    isStatic: PropTypes.bool
-  }
-
   static defaultProps = {
+    // Behaviour
     fadeOutDuration: DEFAULT_FADEOUT_DURATION,
-    onConfirm: () => {},
-    onCancel: () => {},
-    onAutoDismiss: () => {},
     duration: DEFAULT_DURATION,
     isStatic: false,
 
-    // Default styles
+    // Functions
+    onConfirm: Function,
+    onCancel: Function,
+    onAutoDismiss: Function,
+
+    // Styles
     style: {},
     backgroundColor: STYLE_BANNER_COLOR,
     buttonColor: TEXT_COLOR_ACCENT,
     textColor: 'white'
   }
 
-  constructor (props) {
+  constructor (props: SnackItemType) {
     super(props)
 
     this.state = {
@@ -128,7 +117,7 @@ export default class SnackBar extends Component {
     this.hide()
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: SnackItemType) {
     const {
       children,
       confirmText,
@@ -205,10 +194,10 @@ export default class SnackBar extends Component {
         easing: Easing.inOut(Easing.quad),
         duration: fadeOutDuration
       })
-    ]).start(() => onAutoDismiss())
+    ]).start(() => { onAutoDismiss && onAutoDismiss() })
   }
 
-  renderButton = (text, onPress: () => {}, style) => {
+  renderButton = (text: string, onPress: Function = () => {}, style?: Object) => {
     const { buttonColor } = this.props
 
     return (
