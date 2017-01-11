@@ -33,7 +33,7 @@
       "react-native"
     ],
     "plugins": [
-      "transform-flow-strip-types"
+      "flow-react-proptypes"
     ]
   },
   "standard": {
@@ -57,7 +57,7 @@
     "babel-cli": "^6.18.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-react-native": "^1.9.1",
-    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "babel-plugin-flow-react-proptypes": "^0.19.0",
     "rimraf": "^2.5.4"
   },
   "devDependencies": {
