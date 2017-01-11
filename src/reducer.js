@@ -4,17 +4,18 @@ import {
   DISMISS
 } from './actions.js'
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   items: [],
   current: null
 }
 
-function transformProps (item) {
+export function transformProps (item) {
   const { title } = item
   const transformedItem = Object.assign({}, item)
 
   if (title) {
     transformedItem.children = title
+    delete transformedItem.title
   }
 
   return transformedItem
@@ -41,10 +42,7 @@ function add (state, payload) {
   }
 
   if (!state.current) {
-    return {
-      ...state,
-      current: item
-    }
+    return show(state, payload)
   }
 
   return {
