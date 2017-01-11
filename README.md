@@ -1,6 +1,16 @@
 # react-native-snackbar-dialog
 
-A React Native SnackBar component with configurable dialog.
+A React Native SnackBar component with configurable dialog. Pull Requests are welcomed.
+
+[![Build Status][travis-badge]][travis]
+[travis]: https://travis-ci.org/9gag-open-source/react-native-snackbar-dialog
+[travis-badge]: https://img.shields.io/travis/9gag-open-source/react-native-snackbar-dialog.svg
+
+## Why react-native-snackbar-dialog
+
+- *In Control* - All done by React Native, without the need to link it manually
+- *Flexible* - Using it as a popup message or a dialog, it is up to you
+- *Time Saving* - Shipped together with Redux
 
 ## Preview
 
