@@ -131,6 +131,7 @@ export default class SnackBar extends Component {
     )
 
     if (isPropsChanged) {
+      this.hide()
       this.show()
     }
   }
