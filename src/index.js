@@ -24,8 +24,12 @@ export default class SnackBarManager {
       return this._addCurrent(props)
     }
 
-    this.current.update(<SnackBar {...props} onDismiss={SnackBar.dismiss} />)
+    // Temporary disabled
+    // this.current.update(<SnackBar {...props} onDismiss={this.dismiss} />)
+
     return this
+      ._removeCurrent()
+      ._addCurrent(props)
   }
 
   _removeCurrent (): SnackBarManager {
