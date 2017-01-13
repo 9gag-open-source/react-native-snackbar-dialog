@@ -19,17 +19,19 @@ this.current=new _reactNativeRootSiblings2.default(_react2.default.createElement
 return this;
 }},{key:'_updateCurrent',value:function _updateCurrent(
 
-props){
+props){var isAnimated=arguments.length>1&&arguments[1]!==undefined?arguments[1]:false;
 if(!this.current){
 return this._addCurrent(props);
 }
 
-
-
-
+if(isAnimated){
 return this.
 _removeCurrent().
 _addCurrent(props);
+}
+
+this.current.update(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:this.dismiss})));
+return this;
 }},{key:'_removeCurrent',value:function _removeCurrent()
 
 {
@@ -43,7 +45,9 @@ this.current=null;
 return this;
 }},{key:'add',value:function add(
 
-props){
+title,options){
+var props=_extends({children:title},options);
+
 if(this.current){
 this.queue.push(props);
 return;
@@ -52,8 +56,8 @@ return;
 this._addCurrent(props);
 }},{key:'show',value:function show(
 
-props){
-this._updateCurrent(props);
+title,options){
+this._updateCurrent(_extends({children:title},options));
 }},{key:'dismiss',value:function dismiss()
 
 {

@@ -19,17 +19,19 @@ export default class SnackBarManager {
     return this
   }
 
-  _updateCurrent (props): SnackBarManager {
+  _updateCurrent (props, isAnimated: boolean = false): SnackBarManager {
     if (!this.current) {
       return this._addCurrent(props)
     }
 
-    // Temporary disabled
-    // this.current.update(<SnackBar {...props} onDismiss={this.dismiss} />)
+    if (isAnimated) {
+      return this
+        ._removeCurrent()
+        ._addCurrent(props)
+    }
 
+    this.current.update(<SnackBar {...props} onDismiss={this.dismiss} />)
     return this
-      ._removeCurrent()
-      ._addCurrent(props)
   }
 
   _removeCurrent (): SnackBarManager {
@@ -43,7 +45,9 @@ export default class SnackBarManager {
     return this
   }
 
-  add (props): void {
+  add (title: string, options?: Object): void {
+    const props = { children: title, ...options }
+
     if (this.current) {
       this.queue.push(props)
       return
@@ -52,8 +56,8 @@ export default class SnackBarManager {
     this._addCurrent(props)
   }
 
-  show (props): void {
-    this._updateCurrent(props)
+  show (title: string, options?: Object): void {
+    this._updateCurrent({ children: title, ...options })
   }
 
   dismiss (): void {
