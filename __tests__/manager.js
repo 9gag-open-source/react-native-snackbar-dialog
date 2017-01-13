@@ -1,5 +1,5 @@
 import RootSiblings from 'react-native-root-siblings'
-import SnackBarManager from '../src/index'
+import SnackBarManager from '../src/SnackBarManager'
 
 const TITLE = 'Making the world happier'
 

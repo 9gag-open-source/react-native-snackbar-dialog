@@ -27,8 +27,7 @@ yarn add react-native-snackbar-dialog
 ## Basic Usage
 
 ```javascript
-import SnackBarManager from 'react-native-snackbar-dialog'
-const SnackBar = new SnackBarManager()
+import SnackBar from 'react-native-snackbar-dialog'
 ```
 
 Render inline always shows SnackBar without any buttons.
@@ -86,7 +85,7 @@ This library handles messages order with peace of mind.
 <br />For some operations like taking a screenshot requires the message to show it immediately. Using this method to give highest order among all Snack message.
 
 - `SnackBar.add(title, options)`
-<br />Tt will show it immediately if there isn't any active Snack message. Otherwise, it will enqueue and show it one by one when calling the `dismiss` function.
+<br />It will show it immediately if there isn't any active Snack message. Otherwise, it will enqueue and show it one by one when calling the `dismiss` function.
 
 - `SnackBar.dismiss()`
 <br />Adding it manually to `onConfirm` and `onCancel` props action to control the flow of show / hide.
