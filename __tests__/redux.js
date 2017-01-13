@@ -1,4 +1,4 @@
-import SnackBar from '../src'
+import SnackBar from '../src/SnackBar'
 import { INITIAL_STATE, transformProps } from '../src/reducer'
 
 it('transforms Snack item properly', () => {

@@ -3,7 +3,7 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { shallow } from 'enzyme'
 
-import SnackBar from '../src'
+import SnackBar from '../src/SnackBar'
 
 // Using react-test-renderer
 it('renders static SnackBar properly', () => {
