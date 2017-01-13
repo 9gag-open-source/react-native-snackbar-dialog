@@ -2,64 +2,64 @@ import React from 'react'
 import { AsyncStorage } from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
 
-import SnackBarComponent from './SnackBar'
-import Storage from './utils/storage'
+import SnackBar from './SnackBar'
 
-export default class SnackBar {
-  static add = async (props): void => {
-    try {
-      const currentElement = await Storage.getCurrent()
-
-      if (currentElement) {
-        await Storage.addToQueue(props)
-        return
-      }
-
-      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...props} onDismiss={SnackBardismiss} />))
-    } catch (e) {
-      console.warn(e)
-    }
+export default class SnackBarManager {
+  constructor () {
+    this.current = null
+    this.queue = []
   }
 
-  static show = async (props): void => {
-    try {
-console.info('SnackBar.dismiss', SnackBar.dismiss)
-      const newElement = <SnackBarComponent {...props} onDismiss={SnackBar.dismiss} />
-      const currentElement = await Storage.getCurrent()
-console.info('currentElement', currentElement)
-      if (currentElement) {
-        currentElement.update(newElement)
-        return
-      }
-console.info('setCurrent')
-      await Storage.setCurrent(new RootSiblings(newElement))
-    } catch (e) {
-      console.warn(e)
-    }
+  _hasQueue (): boolean {
+    return Array.isArray(this.queue) && this.queue.length
   }
 
-  static dismiss = async (): void => {
-    try {
-      const currentElement = await Storage.getCurrent()
+  _addCurrent (props): SnackBarManager {
+    this.current = new RootSiblings(<SnackBar {...props} onDismiss={this.dismiss} />)
+    return this
+  }
 
-      if (currentElement) {
-        currentElement.destroy()
-        await Storage.removeCurrent()
-      }
-
-      const queue = await Storage.getItems()
-      const hasQueue = Array.isArray(queue) && queue.length
-
-      if (!hasQueue) {
-        return
-      }
-
-      const [currentProps, ...items] = queue
-      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...currentProps} onDismiss={SnackBar.dismiss} />))
-
-      items.length && await Storage.setQueue(items)
-    } catch (e) {
-      console.warn(e)
+  _updateCurrent (props): SnackBarManager {
+    if (!this.current) {
+      return this._addCurrent(props)
     }
+
+    this.current.update(<SnackBar {...props} onDismiss={SnackBar.dismiss} />)
+    return this
+  }
+
+  _removeCurrent (): SnackBarManager {
+    if (!this.current) {
+      return this
+    }
+
+    this.current.destroy()
+    this.current = null
+
+    return this
+  }
+
+  add (props): void {
+    if (this.current) {
+      this.queue.push(props)
+      return
+    }
+
+    this._addCurrent(props)
+  }
+
+  show (props): void {
+    this._updateCurrent(props)
+  }
+
+  dismiss (): void {
+    this._removeCurrent()
+
+    if (!this._hasQueue()) {
+      return
+    }
+
+    const current = this.queue.shift()
+    this._addCurrent(current)
   }
 }

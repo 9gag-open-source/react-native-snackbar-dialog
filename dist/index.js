@@ -1,64 +1,65 @@
-Object.defineProperty(exports,"__esModule",{value:true});var _this=this;var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _react=require('react');var _react2=_interopRequireDefault(_react);
+Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||false;descriptor.configurable=true;if("value"in descriptor)descriptor.writable=true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};}();var _react=require('react');var _react2=_interopRequireDefault(_react);
 var _reactNative=require('react-native');
 var _reactNativeRootSiblings=require('react-native-root-siblings');var _reactNativeRootSiblings2=_interopRequireDefault(_reactNativeRootSiblings);
 
-var _SnackBar=require('./SnackBar');var _SnackBar2=_interopRequireDefault(_SnackBar);
-var _storage=require('./utils/storage');var _storage2=_interopRequireDefault(_storage);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _toArray(arr){return Array.isArray(arr)?arr:Array.from(arr);}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var
+var _SnackBar=require('./SnackBar');var _SnackBar2=_interopRequireDefault(_SnackBar);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var
 
-SnackBar=function SnackBar(){_classCallCheck(this,SnackBar);};SnackBar.
-add=function _callee(props){var currentElement;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;_context.next=3;return regeneratorRuntime.awrap(
+SnackBarManager=function(){
+function SnackBarManager(){_classCallCheck(this,SnackBarManager);
+this.current=null;
+this.queue=[];
+}_createClass(SnackBarManager,[{key:'_hasQueue',value:function _hasQueue()
 
-_storage2.default.getCurrent());case 3:currentElement=_context.sent;if(!
+{
+return Array.isArray(this.queue)&&this.queue.length;
+}},{key:'_addCurrent',value:function _addCurrent(
 
-currentElement){_context.next=8;break;}_context.next=7;return regeneratorRuntime.awrap(
-_storage2.default.addToQueue(props));case 7:return _context.abrupt('return');case 8:_context.next=10;return regeneratorRuntime.awrap(
+props){
+this.current=new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:this.dismiss})));
+return this;
+}},{key:'_updateCurrent',value:function _updateCurrent(
 
+props){
+if(!this.current){
+return this._addCurrent(props);
+}
 
+this.current.update(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:_SnackBar2.default.dismiss})));
+return this;
+}},{key:'_removeCurrent',value:function _removeCurrent()
 
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:SnackBardismiss})))));case 10:_context.next=15;break;case 12:_context.prev=12;_context.t0=_context['catch'](0);
+{
+if(!this.current){
+return this;
+}
 
-console.warn(_context.t0);case 15:case'end':return _context.stop();}}},null,_this,[[0,12]]);};SnackBar.
+this.current.destroy();
+this.current=null;
 
+return this;
+}},{key:'add',value:function add(
 
+props){
+if(this.current){
+this.queue.push(props);
+return;
+}
 
-show=function _callee2(props){var newElement,currentElement;return regeneratorRuntime.async(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;
+this._addCurrent(props);
+}},{key:'show',value:function show(
 
-console.info('this',_this);
-console.info('this.dismiss',_this.dismiss);
-newElement=_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:SnackBar.dismiss}));_context2.next=6;return regeneratorRuntime.awrap(
-_storage2.default.getCurrent());case 6:currentElement=_context2.sent;
-console.info('currentElement',currentElement);if(!
-currentElement){_context2.next=11;break;}
-currentElement.update(newElement);return _context2.abrupt('return');case 11:
+props){
+this._updateCurrent(props);
+}},{key:'dismiss',value:function dismiss()
 
+{
+this._removeCurrent();
 
-console.info('setCurrent');_context2.next=14;return regeneratorRuntime.awrap(
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(newElement)));case 14:_context2.next=19;break;case 16:_context2.prev=16;_context2.t0=_context2['catch'](0);
+if(!this._hasQueue()){
+return;
+}
 
-console.warn(_context2.t0);case 19:case'end':return _context2.stop();}}},null,_this,[[0,16]]);};SnackBar.
-
-
-
-dismiss=function _callee3(){var currentElement,queue,hasQueue,_queue,currentProps,items;return regeneratorRuntime.async(function _callee3$(_context3){while(1){switch(_context3.prev=_context3.next){case 0:_context3.prev=0;_context3.next=3;return regeneratorRuntime.awrap(
-
-_storage2.default.getCurrent());case 3:currentElement=_context3.sent;if(!
-
-currentElement){_context3.next=8;break;}
-currentElement.destroy();_context3.next=8;return regeneratorRuntime.awrap(
-_storage2.default.removeCurrent());case 8:_context3.next=10;return regeneratorRuntime.awrap(
-
-
-_storage2.default.getItems());case 10:queue=_context3.sent;
-hasQueue=Array.isArray(queue)&&queue.length;if(
-
-hasQueue){_context3.next=14;break;}return _context3.abrupt('return');case 14:_queue=_toArray(
-
-
-
-queue),currentProps=_queue[0],items=_queue.slice(1);_context3.next=17;return regeneratorRuntime.awrap(
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},currentProps,{onDismiss:SnackBar.dismiss})))));case 17:_context3.t0=
-
-items.length;if(!_context3.t0){_context3.next=21;break;}_context3.next=21;return regeneratorRuntime.awrap(_storage2.default.setQueue(items));case 21:_context3.next=26;break;case 23:_context3.prev=23;_context3.t1=_context3['catch'](0);
-
-console.warn(_context3.t1);case 26:case'end':return _context3.stop();}}},null,_this,[[0,23]]);};exports.default=SnackBar;
+var current=this.queue.shift();
+this._addCurrent(current);
+}}]);return SnackBarManager;}();exports.default=SnackBarManager;
 //# sourceMappingURL=index.js.map
