@@ -6,11 +6,11 @@ const KEY_QUEUE = `${STORAGE_NAMESPACE}:QUEUE`
 
 export default class Storage {
   static getCurrent = async () => {
-    return await AsyncStorage.getItem(KEY_CURRENT)
+    return JSON.parse(await AsyncStorage.getItem(KEY_CURRENT))
   }
 
   static setCurrent = async (item) => {
-    return await AsyncStorage.setItem(KEY_CURRENT, item)
+    return await AsyncStorage.setItem(KEY_CURRENT, JSON.stringify(item))
   }
 
   static removeCurrent = async () => {
@@ -18,21 +18,21 @@ export default class Storage {
   }
 
   static getItems = async () => {
-    return await AsyncStorage.getItem(KEY_QUEUE)
+    return JSON.parse(await AsyncStorage.getItem(KEY_QUEUE))
   }
 
   static hasItems = async () => {
-    const queue = await AsyncStorage.getItem(KEY_QUEUE)
+    const queue = JSON.parse(await AsyncStorage.getItem(KEY_QUEUE))
     return Array.isArray(queue) && queue.length
   }
 
   static addToQueue = async (item) => {
-    const queue = await AsyncStorage.getItem(KEY_QUEUE)
+    const queue = JSON.parse(await AsyncStorage.getItem(KEY_QUEUE))
     const hasQueue = Array.isArray(queue) && queue.length
-    await AsyncStorage.setItem(KEY_QUEUE, hasQueue ? queue.concat(item) : item)
+    await AsyncStorage.setItem(KEY_QUEUE, JSON.stringify(hasQueue ? queue.concat(item) : item))
   }
 
   static setQueue = async (items) => {
-    await AsyncStorage.setItem(KEY_QUEUE, items)
+    await AsyncStorage.setItem(KEY_QUEUE, JSON.stringify(tems))
   }
 }
