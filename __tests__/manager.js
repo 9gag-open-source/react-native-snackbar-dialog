@@ -42,25 +42,28 @@ it('adds Snack item properly when there is an active item', () => {
 it('should dismiss current item properly', () => {
   const SnackBar = new SnackBarManager()
 
-  SnackBar.add(TITLE)
-  SnackBar.dismiss()
+  SnackBar.add(TITLE, () => {
+    SnackBar.dismiss(() => {
+      const { current, queue } = SnackBar.get()
 
-  const { current, queue } = SnackBar.get()
-
-  expect(current).toBeNull()
-  expect(queue).toHaveLength(0)
+      expect(current).toBeNull()
+      expect(queue).toHaveLength(0)
+    })
+  })
 })
 
 it('should show the next item when dismissing', () => {
   const SnackBar = new SnackBarManager()
   const newTitle = 'Making a happier world'
 
-  SnackBar.add(TITLE)
-  SnackBar.add(newTitle)
-  SnackBar.dismiss()
+  SnackBar.add(TITLE, () => {
+    SnackBar.add(newTitle, () => {
+      SnackBar.dismiss(() => {
+        const { current, queue } = SnackBar.get()
 
-  const { current, queue } = SnackBar.get()
-
-  expect(current).toBeInstanceOf(RootSiblings)
-  expect(queue).toHaveLength(0)
+        expect(current).toBeInstanceOf(RootSiblings)
+        expect(queue).toHaveLength(0)
+      })
+    })
+  })
 })
