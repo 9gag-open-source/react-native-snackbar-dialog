@@ -35,7 +35,7 @@ it('adds Snack item properly when there is an active item', () => {
   expect(current).toBeInstanceOf(RootSiblings)
   expect(queue).toHaveLength(1)
   expect(queue[0]).toMatchObject({
-    children: newTitle
+    title: newTitle
   })
 })
 

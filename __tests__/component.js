@@ -8,9 +8,10 @@ import SnackBar from '../src/SnackBar'
 // Using react-test-renderer
 it('renders static SnackBar properly', () => {
   const tree = renderer.create(
-    <SnackBar isStatic>
-      Making the world happier
-    </SnackBar>
+    <SnackBar
+      title='Making the world happier'
+      isStatic
+    />
   ).toJSON()
 
   expect(tree).toMatchSnapshot()
@@ -30,9 +31,11 @@ it('renders inline SnackBar properly', () => {
   const onConfirm = () => { isClicked = true }
 
   const wrapper = shallow(
-    <SnackBar confirmText='Learn more' onConfirm={onConfirm}>
-      Making the world happier
-    </SnackBar>
+    <SnackBar
+      title='Making the world happier'
+      confirmText='Learn more'
+      onConfirm={onConfirm}
+    />
   )
 
   const inlineView = wrapper.children()
@@ -55,13 +58,12 @@ it('renders dialog SnackBar properly', () => {
 
   const wrapper = shallow(
     <SnackBar
+      title='Making the world happier'
       confirmText='Learn more'
       onConfirm={() => {}}
       cancelText='No thanks'
       onCancel={onCancel}
-    >
-      Making the world happier
-    </SnackBar>
+    />
   )
 
   const viewWrapper = wrapper.children().children()
@@ -86,14 +88,13 @@ it('renders dialog SnackBar properly', () => {
 it('renders SnackBar styles properly', () => {
   const wrapper = shallow(
     <SnackBar
+      title='Making the world happier'
       style={{ marginBottom: 20 }}
       backgroundColor='white'
       textColor='yellow'
       confirmText='Learn more'
       buttonColor='blue'
-    >
-      Making the world happier
-    </SnackBar>
+    />
   )
 
   expect(wrapper.text()).toBe('<AnimatedComponent />')

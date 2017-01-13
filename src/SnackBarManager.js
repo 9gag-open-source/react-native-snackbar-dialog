@@ -18,23 +18,20 @@ export default class SnackBarManager {
   }
 
   _addCurrent (props: SnackItemType): SnackBarManager {
-    this.current = new RootSiblings(<SnackBar {...props} onDismiss={this.dismiss} />)
+    this.current = new RootSiblings(<SnackBar {...props} onAutoDismiss={this.dismiss} />)
     return this
   }
 
-  _updateCurrent (props: SnackItemType, isAnimated: boolean = false): SnackBarManager {
+  _updateCurrent (props: SnackItemType): SnackBarManager {
     if (!this.current) {
       return this._addCurrent(props)
     }
 
-    if (isAnimated) {
-      return this
-        ._removeCurrent()
-        ._addCurrent(props)
-    }
+    // An alternative way to update element content without hiding and showing animation
+    // this.current.update(<SnackBar {...props} onAutoDismiss={this.dismiss} />)
+    // return this
 
-    this.current.update(<SnackBar {...props} onDismiss={this.dismiss} />)
-    return this
+    return this._removeCurrent()._addCurrent(props)
   }
 
   _removeCurrent (): SnackBarManager {
@@ -56,7 +53,7 @@ export default class SnackBarManager {
   }
 
   add (title: string, options?: SnackItemType): void {
-    const props = { children: title, ...options }
+    const props = { title, ...options }
 
     if (this.current) {
       this.queue.push(props)
@@ -67,7 +64,7 @@ export default class SnackBarManager {
   }
 
   show (title: string, options?: SnackItemType): void {
-    this._updateCurrent({ children: title, ...options })
+    this._updateCurrent({ title, ...options })
   }
 
   dismiss (): void {

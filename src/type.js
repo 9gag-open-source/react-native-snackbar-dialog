@@ -1,8 +1,7 @@
 // @flow
 
 export type SnackItemType = {
-  title?: string,
-  children?: string,
+  title: string,
 
   // Button
   confirmText?: string,

@@ -113,13 +113,13 @@ export default class SnackBar extends Component {
 
   componentWillReceiveProps (nextProps: SnackItemType) {
     const {
-      children,
+      title,
       confirmText,
       cancelText
     } = this.props
 
     const isPropsChanged = (
-      children !== nextProps.children ||
+      title !== nextProps.title ||
       confirmText !== nextProps.confirmText ||
       cancelText !== nextProps.cancelText
     )
@@ -210,11 +210,11 @@ export default class SnackBar extends Component {
       onConfirm,
       cancelText,
       onCancel,
-      children,
+      title,
       textColor
     } = this.props
 
-    const titleElement = <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+    const titleElement = <Text style={[styles.text, { color: textColor }]}>{title}</Text>
 
     if (confirmText && cancelText) {
       return (
@@ -231,7 +231,7 @@ export default class SnackBar extends Component {
     if (confirmText) {
       return (
         <View style={styles.inlineRow}>
-          <Text style={[styles.inlineText, { color: textColor }]}>{children}</Text>
+          <Text style={[styles.inlineText, { color: textColor }]}>{title}</Text>
           { this.renderButton(confirmText, onConfirm) }
         </View>
       )
