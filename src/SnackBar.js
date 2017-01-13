@@ -2,9 +2,6 @@
 
 import React, { Component } from 'react'
 import Timer from 'react-native-timer'
-
-import * as actions from './actions'
-import reducer from './reducer'
 import type { SnackItemType } from './type'
 
 import {
@@ -78,9 +75,6 @@ export default class SnackBar extends Component {
   }
 
   props: SnackItemType
-
-  static actions = actions
-  static reducer = reducer
 
   static defaultProps = {
     // Behaviour

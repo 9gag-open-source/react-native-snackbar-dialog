@@ -22,13 +22,3 @@ export type SnackItemType = {
   duration?: number,
   isStatic?: boolean
 }
-
-export type StateType = {
-  items: Array<SnackItemType>,
-  current: ?SnackItemType
-}
-
-export type ActionType = {
-  type: string,
-  payload: SnackItemType
-}

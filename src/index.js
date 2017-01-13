@@ -2,9 +2,13 @@ import React from 'react'
 import { AsyncStorage } from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
 
+import type { SnackItemType } from './type'
 import SnackBar from './SnackBar'
 
 export default class SnackBarManager {
+  current: SnackItemType
+  queue: Array<SnackItemType>
+
   constructor () {
     this.current = null
     this.queue = []
@@ -14,12 +18,12 @@ export default class SnackBarManager {
     return Array.isArray(this.queue) && this.queue.length
   }
 
-  _addCurrent (props): SnackBarManager {
+  _addCurrent (props: SnackItemType): SnackBarManager {
     this.current = new RootSiblings(<SnackBar {...props} onDismiss={this.dismiss} />)
     return this
   }
 
-  _updateCurrent (props, isAnimated: boolean = false): SnackBarManager {
+  _updateCurrent (props: SnackItemType, isAnimated: boolean = false): SnackBarManager {
     if (!this.current) {
       return this._addCurrent(props)
     }
@@ -45,7 +49,14 @@ export default class SnackBarManager {
     return this
   }
 
-  add (title: string, options?: Object): void {
+  get() {
+    return {
+      current: this.current,
+      queue: this.queue
+    }
+  }
+
+  add (title: string, options?: SnackItemType): void {
     const props = { children: title, ...options }
 
     if (this.current) {
@@ -56,7 +67,7 @@ export default class SnackBarManager {
     this._addCurrent(props)
   }
 
-  show (title: string, options?: Object): void {
+  show (title: string, options?: SnackItemType): void {
     this._updateCurrent({ children: title, ...options })
   }
 
