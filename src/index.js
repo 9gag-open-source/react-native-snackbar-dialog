@@ -25,12 +25,12 @@ export default class SnackBar {
     try {
       const newElement = <SnackBarComponent {...props} onDismiss={dismiss} />
       const currentElement = await Storage.getCurrent()
-
+console.info('currentElement', currentElement)
       if (currentElement) {
         currentElement.update(newElement)
         return
       }
-
+console.info('setCurrent')
       await Storage.setCurrent(new RootSiblings(newElement))
     } catch (e) {
       console.warn(e)

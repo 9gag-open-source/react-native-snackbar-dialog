@@ -24,16 +24,16 @@ console.warn(_context.t0);case 15:case'end':return _context.stop();}}},null,_thi
 show=function _callee2(props){var newElement,currentElement;return regeneratorRuntime.async(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;
 
 newElement=_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:dismiss}));_context2.next=4;return regeneratorRuntime.awrap(
-_storage2.default.getCurrent());case 4:currentElement=_context2.sent;if(!
+_storage2.default.getCurrent());case 4:currentElement=_context2.sent;
+console.info('currentElement',currentElement);if(!
+currentElement){_context2.next=9;break;}
+currentElement.update(newElement);return _context2.abrupt('return');case 9:
 
-currentElement){_context2.next=8;break;}
-currentElement.update(newElement);return _context2.abrupt('return');case 8:_context2.next=10;return regeneratorRuntime.awrap(
 
+console.info('setCurrent');_context2.next=12;return regeneratorRuntime.awrap(
+_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(newElement)));case 12:_context2.next=17;break;case 14:_context2.prev=14;_context2.t0=_context2['catch'](0);
 
-
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(newElement)));case 10:_context2.next=15;break;case 12:_context2.prev=12;_context2.t0=_context2['catch'](0);
-
-console.warn(_context2.t0);case 15:case'end':return _context2.stop();}}},null,_this,[[0,12]]);};SnackBar.
+console.warn(_context2.t0);case 17:case'end':return _context2.stop();}}},null,_this,[[0,14]]);};SnackBar.
 
 
 
