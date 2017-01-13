@@ -23,7 +23,8 @@ export default class SnackBarManager {
 
   _removeCurrent = (callback?: Function = () => {}): void => {
     if (!this.current) {
-      return this
+      callback()
+      return
     }
 
     this.current.destroy(() => {
@@ -71,6 +72,7 @@ export default class SnackBarManager {
   dismiss = (callback?: Function = () => {}): void => {
     this._removeCurrent(() => {
       if (!this._hasQueue()) {
+        callback()
         return
       }
 
