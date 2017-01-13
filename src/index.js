@@ -23,8 +23,7 @@ export default class SnackBar {
 
   static show = async (props): void => {
     try {
-      console.info('this', this)
-      console.info('this.dismiss', this.dismiss)
+console.info('SnackBar.dismiss', SnackBar.dismiss)
       const newElement = <SnackBarComponent {...props} onDismiss={SnackBar.dismiss} />
       const currentElement = await Storage.getCurrent()
 console.info('currentElement', currentElement)
