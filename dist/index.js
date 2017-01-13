@@ -2,9 +2,13 @@ Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.ass
 var _reactNative=require('react-native');
 var _reactNativeRootSiblings=require('react-native-root-siblings');var _reactNativeRootSiblings2=_interopRequireDefault(_reactNativeRootSiblings);
 
-var _SnackBar=require('./SnackBar');var _SnackBar2=_interopRequireDefault(_SnackBar);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var
+
+var _SnackBar=require('./SnackBar');var _SnackBar2=_interopRequireDefault(_SnackBar);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var babelPluginFlowReactPropTypes_proptype_SnackItemType=require('./type').babelPluginFlowReactPropTypes_proptype_SnackItemType||require('react').PropTypes.any;var
 
 SnackBarManager=function(){
+
+
+
 function SnackBarManager(){_classCallCheck(this,SnackBarManager);
 this.current=null;
 this.queue=[];
@@ -43,6 +47,13 @@ this.current.destroy();
 this.current=null;
 
 return this;
+}},{key:'get',value:function get()
+
+{
+return{
+current:this.current,
+queue:this.queue};
+
 }},{key:'add',value:function add(
 
 title,options){

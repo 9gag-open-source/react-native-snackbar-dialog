@@ -3,11 +3,8 @@ Object.defineProperty(exports,"__esModule",{value:true});var _createClass=functi
 var _react=require('react');var _react2=_interopRequireDefault(_react);
 var _reactNativeTimer=require('react-native-timer');var _reactNativeTimer2=_interopRequireDefault(_reactNativeTimer);
 
-var _actions=require('./actions');var actions=_interopRequireWildcard(_actions);
-var _reducer=require('./reducer');var _reducer2=_interopRequireDefault(_reducer);
 
-
-var _reactNative=require('react-native');function _interopRequireWildcard(obj){if(obj&&obj.__esModule){return obj;}else{var newObj={};if(obj!=null){for(var key in obj){if(Object.prototype.hasOwnProperty.call(obj,key))newObj[key]=obj[key];}}newObj.default=obj;return newObj;}}function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var babelPluginFlowReactPropTypes_proptype_SnackItemType=require('./type').babelPluginFlowReactPropTypes_proptype_SnackItemType||require('react').PropTypes.any;
+var _reactNative=require('react-native');function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self,call){if(!self){throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call&&(typeof call==="object"||typeof call==="function")?call:self;}function _inherits(subClass,superClass){if(typeof superClass!=="function"&&superClass!==null){throw new TypeError("Super expression must either be null or a function, not "+typeof superClass);}subClass.prototype=Object.create(superClass&&superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__=superClass;}var babelPluginFlowReactPropTypes_proptype_SnackItemType=require('./type').babelPluginFlowReactPropTypes_proptype_SnackItemType||require('react').PropTypes.any;
 
 
 
@@ -72,9 +69,6 @@ marginHorizontal:16}});var
 
 
 SnackBar=function(_Component){_inherits(SnackBar,_Component);
-
-
-
 
 
 
@@ -264,5 +258,5 @@ style]},
 this.renderContent()));
 
 
-}}]);return SnackBar;}(_react.Component);SnackBar.actions=actions;SnackBar.reducer=_reducer2.default;SnackBar.defaultProps={fadeOutDuration:DEFAULT_FADEOUT_DURATION,duration:DEFAULT_DURATION,isStatic:false,onConfirm:Function,onCancel:Function,onAutoDismiss:Function,style:{},backgroundColor:STYLE_BANNER_COLOR,buttonColor:TEXT_COLOR_ACCENT,textColor:'white'};exports.default=SnackBar;
+}}]);return SnackBar;}(_react.Component);SnackBar.defaultProps={fadeOutDuration:DEFAULT_FADEOUT_DURATION,duration:DEFAULT_DURATION,isStatic:false,onConfirm:Function,onCancel:Function,onAutoDismiss:Function,style:{},backgroundColor:STYLE_BANNER_COLOR,buttonColor:TEXT_COLOR_ACCENT,textColor:'white'};exports.default=SnackBar;
 //# sourceMappingURL=SnackBar.js.map
