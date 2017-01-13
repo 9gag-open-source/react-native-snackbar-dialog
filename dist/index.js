@@ -15,7 +15,7 @@ _storage2.default.addToQueue(props));case 7:return _context.abrupt('return');cas
 
 
 
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:dismiss})))));case 10:_context.next=15;break;case 12:_context.prev=12;_context.t0=_context['catch'](0);
+_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:SnackBardismiss})))));case 10:_context.next=15;break;case 12:_context.prev=12;_context.t0=_context['catch'](0);
 
 console.warn(_context.t0);case 15:case'end':return _context.stop();}}},null,_this,[[0,12]]);};SnackBar.
 
@@ -23,17 +23,19 @@ console.warn(_context.t0);case 15:case'end':return _context.stop();}}},null,_thi
 
 show=function _callee2(props){var newElement,currentElement;return regeneratorRuntime.async(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.prev=0;
 
-newElement=_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:dismiss}));_context2.next=4;return regeneratorRuntime.awrap(
-_storage2.default.getCurrent());case 4:currentElement=_context2.sent;
+console.info('this',_this);
+console.info('this.dismiss',_this.dismiss);
+newElement=_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:SnackBar.dismiss}));_context2.next=6;return regeneratorRuntime.awrap(
+_storage2.default.getCurrent());case 6:currentElement=_context2.sent;
 console.info('currentElement',currentElement);if(!
-currentElement){_context2.next=9;break;}
-currentElement.update(newElement);return _context2.abrupt('return');case 9:
+currentElement){_context2.next=11;break;}
+currentElement.update(newElement);return _context2.abrupt('return');case 11:
 
 
-console.info('setCurrent');_context2.next=12;return regeneratorRuntime.awrap(
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(newElement)));case 12:_context2.next=17;break;case 14:_context2.prev=14;_context2.t0=_context2['catch'](0);
+console.info('setCurrent');_context2.next=14;return regeneratorRuntime.awrap(
+_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(newElement)));case 14:_context2.next=19;break;case 16:_context2.prev=16;_context2.t0=_context2['catch'](0);
 
-console.warn(_context2.t0);case 17:case'end':return _context2.stop();}}},null,_this,[[0,14]]);};SnackBar.
+console.warn(_context2.t0);case 19:case'end':return _context2.stop();}}},null,_this,[[0,16]]);};SnackBar.
 
 
 
@@ -54,7 +56,7 @@ hasQueue){_context3.next=14;break;}return _context3.abrupt('return');case 14:_qu
 
 
 queue),currentProps=_queue[0],items=_queue.slice(1);_context3.next=17;return regeneratorRuntime.awrap(
-_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},currentProps,{onDismiss:dismiss})))));case 17:_context3.t0=
+_storage2.default.setCurrent(new _reactNativeRootSiblings2.default(_react2.default.createElement(_SnackBar2.default,_extends({},currentProps,{onDismiss:SnackBar.dismiss})))));case 17:_context3.t0=
 
 items.length;if(!_context3.t0){_context3.next=21;break;}_context3.next=21;return regeneratorRuntime.awrap(_storage2.default.setQueue(items));case 21:_context3.next=26;break;case 23:_context3.prev=23;_context3.t1=_context3['catch'](0);
 

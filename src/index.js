@@ -15,7 +15,7 @@ export default class SnackBar {
         return
       }
 
-      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...props} onDismiss={dismiss} />))
+      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...props} onDismiss={SnackBardismiss} />))
     } catch (e) {
       console.warn(e)
     }
@@ -23,7 +23,9 @@ export default class SnackBar {
 
   static show = async (props): void => {
     try {
-      const newElement = <SnackBarComponent {...props} onDismiss={dismiss} />
+      console.info('this', this)
+      console.info('this.dismiss', this.dismiss)
+      const newElement = <SnackBarComponent {...props} onDismiss={SnackBar.dismiss} />
       const currentElement = await Storage.getCurrent()
 console.info('currentElement', currentElement)
       if (currentElement) {
@@ -54,7 +56,7 @@ console.info('setCurrent')
       }
 
       const [currentProps, ...items] = queue
-      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...currentProps} onDismiss={dismiss} />))
+      await Storage.setCurrent(new RootSiblings(<SnackBarComponent {...currentProps} onDismiss={SnackBar.dismiss} />))
 
       items.length && await Storage.setQueue(items)
     } catch (e) {
