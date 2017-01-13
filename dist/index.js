@@ -24,8 +24,12 @@ if(!this.current){
 return this._addCurrent(props);
 }
 
-this.current.update(_react2.default.createElement(_SnackBar2.default,_extends({},props,{onDismiss:_SnackBar2.default.dismiss})));
-return this;
+
+
+
+return this.
+_removeCurrent().
+_addCurrent(props);
 }},{key:'_removeCurrent',value:function _removeCurrent()
 
 {
