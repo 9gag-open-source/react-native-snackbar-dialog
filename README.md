@@ -80,7 +80,7 @@ SnackBar.show('Making the world happier', {
 
 ## Flow Control
 
-This library handles messages order with piece of mind.
+This library handles messages order with peace of mind.
 
 - `SnackBar.show(title, options)`
 <br />For some operations like taking a screenshot requires the message to show it immediately. Using this method to give highest order among all Snack message.
