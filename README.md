@@ -7,8 +7,8 @@ A React Native SnackBar component with configurable dialog. Pull Requests are we
 ## Why react-native-snackbar-dialog?
 
 - *Flexible* - Display as a popup message or a dialog
-- *In Control* - Empowered by React Native without the need to touch native components
-- *Time Saving* - Built-in Redux actions and reducer
+- *Controllable* - Everything is just JavaScript and React Native
+- *Simple* - No configuration on the RootContainer and Redux
 
 ## Preview
 
@@ -31,118 +31,61 @@ import SnackBar from 'react-native-snackbar-dialog'
 ```
 
 Render inline always shows SnackBar without any buttons.
-```jsx
-<SnackBar isStatic>
-  Making the world happier
-</SnackBar>
+```javascript
+SnackBar.show('Making the world happier', { isStatic: true })
 ```
 
 Controlling the show/hide logic with the `onAutoDismiss` callback with 8 seconds duration (default: 5 seconds).
-```jsx
-{
-  this.props.showSnackBar && (
-    <SnackBar duration={8000} onAutoDismiss={this.props.onSnackBarClose}>
-      Making the world happier
-    </SnackBar>
-  )
-}
+```javascript
+SnackBar.show('Making the world happier', { duration: 8000 })
 ```
 
-An inline SnackBar with an action button.
-```jsx
-<SnackBar confirmText='Learn more' onConfirm={() => { console.log('Thank you') }}>
-  Making the world happier
-</SnackBar>
+An inline SnackBar with an action button, triggering dismiss after confirm.
+```javascript
+SnackBar.show('Making the world happier', {
+  confirmText: 'Learn more',
+  onConfirm: () => {
+    console.log('Thank you')
+    SnackBar.dismiss()
+  }
+})
 ```
 
 A SnackBar dialog with separated row action button display.
-```jsx
-<SnackBar
-  confirmText='Learn more'
-  onConfirm={() => { console.log('Thank you') }}
-  cancelText='No thanks'
-  onCancel={() => { console.log('Hope to see you again') }}
->
-  Making the world happier
-</SnackBar>
+```javascript
+SnackBar.show('Making the world happier', {
+  confirmText: 'Learn more',
+  onConfirm: () => {
+    console.log('Thank you')
+    SnackBar.dismiss()
+  },
+  cancelText: 'No thanks',
+  onCancel: () => {
+    console.log('Hope to see you again')
+    SnackBar.dismiss()
+  }
+})
 ```
 
 A SnackBar with confirgurable style.
-```jsx
-<SnackBar
-  style={{ marginBottom: 20 }}
-  backgroundColor='white'
-  buttonColor='blue'
-  textColor='yellow'
->
-  Making the world happier
-</SnackBar>
-```
-
-## Using with Redux
-
-This library can be integrated with any Redux applications to handle messages to be displayed with proper order.
-
-### Actions
-
-- `SnackBar.actions.add(item)`
-<br />If there isn't any items in the Store, it will show it immediately. Otherwise, it will enqueue and show it accordingly when the `dismiss` function is triggered.
-
-- `SnackBar.actions.show(item)`
-<br />Some operations like taking a screenshot require the message to show immediately. Using this method will not change the queue order.
-
-- `SnackBar.actions.dismiss()`
-<br />Adding this action to the props `onAutoDismiss` in root container tells Redux to dequeue the next item according to priority.
-Or adding it manually to `onConfirm` and `onCancel` props action to control the flow of show/hide.
-
-### Example
-
-```jsx
-import { View, Text } from 'react-native'
-import SnackBar from 'react-native-snackbar-dialog'
-import connect from 'react-redux'
-
-function RootContainer ({ snack, addSnack, showSnack, dismissSnack }) {
-  const inlineItem = {
-    title: 'Making the world happier',
-    confirmText: 'Learn more',
-    onConfirm: () => {
-      dismissSnack()
-      console.log('Thank you')
-    },
-    duration: 10000
-  }
-
-  const dialogItem = {
-    ...inlineItem,
-    cancelText: 'No thanks',
-    onCancel: () => {
-      // Dispatching a new StackBar action when clicking cancel
-      // Need not to use `dismissSnack` here since the `showSnack` will replace current active item
-      showSnack(inlineItem)
-    }
-  }
-
-  return (
-    <View>
-      <Text onPress={() => addSnack(inlineItem)}>Enqueue</Text>
-      <Text onPress={() => showSnack(dialogItem)}>Show</Text>
-      { snack && <SnackBar {...snack} onAutoDismiss={dismissSnack} /> }
-    </View>
-  )
-}
-
-const mapStateToProps = (state) => {
-  return {
-    snack: state.snackBar.current
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  addSnack: (item) => dispatch(SnackBar.actions.add(item)),
-  showSnack: (item) => dispatch(SnackBar.actions.show(item)),
-  dismissSnack: () => dispatch(SnackBar.actions.dismiss())
+```javascript
+SnackBar.show('Making the world happier', {
+  style: { marginBottom: 20 },
+  backgroundColor: 'white',
+  buttonColor: 'blue',
+  textColor: 'yellow'
 })
-
-export default connect(mapStateToProps, mapDispatchToProps)(RootContainer)
 ```
+
+## Flow Control
+
+This library handles messages order with peace of mind.
+
+- `SnackBar.show(title, options)`
+<br />For some operations like taking a screenshot requires the message to show it immediately. Using this method to give highest order among all Snack message.
+
+- `SnackBar.add(title, options)`
+<br />It will show it immediately if there isn't any active Snack message. Otherwise, it will enqueue and show it one by one when calling the `dismiss` function.
+
+- `SnackBar.dismiss()`
+<br />Adding it manually to `onConfirm` and `onCancel` props action to control the flow of show / hide.

@@ -1,8 +1,7 @@
 // @flow
 
 export type SnackItemType = {
-  title?: string,
-  children?: string,
+  title: string,
 
   // Button
   confirmText?: string,
@@ -21,14 +20,4 @@ export type SnackItemType = {
   fadeOutDuration?: number,
   duration?: number,
   isStatic?: boolean
-}
-
-export type StateType = {
-  items: Array<SnackItemType>,
-  current: ?SnackItemType
-}
-
-export type ActionType = {
-  type: string,
-  payload: SnackItemType
 }
