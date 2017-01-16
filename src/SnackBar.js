@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
 
   button: {
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: '500',
+    marginLeft: 8
   },
 
   actionRow: {
