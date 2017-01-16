@@ -112,25 +112,8 @@ export default class SnackBar extends Component {
   }
 
   componentWillUnmount () {
-    this.hide()
-  }
-
-  componentWillReceiveProps (nextProps: SnackItemType) {
-    const {
-      title,
-      confirmText,
-      cancelText
-    } = this.props
-
-    const isPropsChanged = (
-      title !== nextProps.title ||
-      confirmText !== nextProps.confirmText ||
-      cancelText !== nextProps.cancelText
-    )
-
-    if (isPropsChanged) {
+    if (this.props.isStatic) {
       this.hide()
-      this.show()
     }
   }
 
