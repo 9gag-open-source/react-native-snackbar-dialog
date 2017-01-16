@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    paddingHorizontal: 8
+    paddingHorizontal: 12,
+    paddingVertical: 10
   },
 
   button: {
