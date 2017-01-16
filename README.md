@@ -79,13 +79,13 @@ SnackBar.show('Making the world happier', {
 
 ## Flow Control
 
-This library handles messages order with peace of mind.
+This library handles messages order with peace of mind. Calling these functions will show the message immediately if there is no active item.
 
 - `SnackBar.show(title, options)`
-<br />For some operations like taking a screenshot requires the message to show it immediately. Using this method to give highest order among all Snack message.
+<br />Give highest priority to show among all Snack messages.
 
 - `SnackBar.add(title, options)`
-<br />It will show it immediately if there isn't any active Snack message. Otherwise, it will enqueue and show it one by one when calling the `dismiss` function.
+<br />Enqueue and show it one by one when calling the `dismiss` function.
 
 - `SnackBar.dismiss()`
-<br />Adding it manually to `onConfirm` and `onCancel` props action to control the flow of show / hide.
+<br />Control when and where to dismiss an active item, e.g. `onConfirm` and `onCancel` props action.

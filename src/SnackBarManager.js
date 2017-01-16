@@ -13,11 +13,7 @@ export default class SnackBarManager {
     this.queue = []
   }
 
-  _hasQueue = (): boolean => {
-    return Array.isArray(this.queue) && this.queue.length
-  }
-
-  _addCurrent = (props: SnackItemType, callback?: Function = () => {}): void => {
+  _setCurrent = (props: SnackItemType, callback?: Function = () => {}): void => {
     this.current = new RootSiblings(<SnackBar {...props} onAutoDismiss={this.dismiss} />, callback)
   }
 
@@ -53,31 +49,34 @@ export default class SnackBarManager {
       return
     }
 
-    this._addCurrent(props, callback)
+    this._setCurrent(props, callback)
   }
 
-  show = (title: string, options?: SnackItemType): void => {
+  show = (
+    title: string,
+    options?: SnackItemType,
+    callback?: Function = () => {}
+  ): void => {
     const props = { title, ...options }
 
-    if (!this.current) {
-      this._addCurrent(props)
+    if (this.current) {
+      this.queue.unshift(props)
+      callback()
       return
     }
 
-    this._removeCurrent(() => {
-      this._addCurrent(props)
-    })
+    this._setCurrent(props, callback)
   }
 
   dismiss = (callback?: Function = () => {}): void => {
     this._removeCurrent(() => {
-      if (!this._hasQueue()) {
+      if (!this.queue.length) {
         callback()
         return
       }
 
       const current = this.queue.shift()
-      this._addCurrent(current, callback)
+      this._setCurrent(current, callback)
     })
   }
 }
