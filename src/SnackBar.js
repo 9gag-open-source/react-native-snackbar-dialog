@@ -67,8 +67,7 @@ const styles = StyleSheet.create({
   },
 
   flat: {
-    fontSize: 14,
-    marginHorizontal: 16
+    fontSize: 14
   }
 })
 
