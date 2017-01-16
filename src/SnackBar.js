@@ -21,7 +21,6 @@ const INITIAL_POSITION: number = -180
 
 const STYLE_BANNER_COLOR: string = '#000000'
 const TEXT_COLOR_ACCENT: string = '#0088ff'
-const HIT_SLOP = { top: 8, bottom: 8, left: 8, right: 8 }
 
 const TIMEOUT_ID: string = 'snackBar'
 
@@ -44,6 +43,11 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
 
+  buttonContainer: {
+    paddingHorizontal: 12,
+    paddingVertical: 10
+  },
+
   button: {
     fontSize: 16,
     fontWeight: '500'
@@ -52,8 +56,8 @@ const styles = StyleSheet.create({
   actionRow: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    padding: 18,
-    marginBottom: 6
+    padding: 8,
+    marginBottom: 8
   },
 
   inlineRow: {
@@ -196,7 +200,7 @@ export default class SnackBar extends Component {
     const { buttonColor } = this.props
 
     return (
-      <TouchableOpacity hitSlop={HIT_SLOP} onPress={onPress}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
         <Text style={[styles.button, style, { color: buttonColor }]}>
           {text}
         </Text>

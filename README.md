@@ -77,15 +77,30 @@ SnackBar.show('Making the world happier', {
 })
 ```
 
+A SnackBar with nested actions. Always dismiss current SnackBar before showing a new one using the dismiss callback.
+```javascript
+SnackBar.add('Making the world happier', {
+  confirmText: 'Learn more',
+  onConfirm: () => {
+    console.log('Thank you')
+    SnackBar.dismiss(() => {
+      SnackBar.show('Stay unstoppable!')
+    })
+  }
+})
+```
+
 ## Flow Control
 
 This library handles messages order with peace of mind.
+Calling these functions will show the message immediately if there is no active item.
+Callback is optional, but it is suggested to use for flow control.
 
-- `SnackBar.show(title, options)`
-<br />For some operations like taking a screenshot requires the message to show it immediately. Using this method to give highest order among all Snack message.
+- `SnackBar.show(title, options, [callback])`
+<br />Give highest priority to show among all Snack messages.
 
-- `SnackBar.add(title, options)`
-<br />It will show it immediately if there isn't any active Snack message. Otherwise, it will enqueue and show it one by one when calling the `dismiss` function.
+- `SnackBar.add(title, options, [callback])`
+<br />Enqueue and show it one by one when calling the `dismiss` function.
 
-- `SnackBar.dismiss()`
-<br />Adding it manually to `onConfirm` and `onCancel` props action to control the flow of show / hide.
+- `SnackBar.dismiss([callback])`
+<br />Control when and where to dismiss an active item, e.g. `onConfirm` and `onCancel` props action.

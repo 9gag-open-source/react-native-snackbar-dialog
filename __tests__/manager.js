@@ -6,40 +6,41 @@ const TITLE = 'Making the world happier'
 it('shows Snack item properly', () => {
   const SnackBar = new SnackBarManager()
 
-  SnackBar.show(TITLE)
-
-  const { current, queue } = SnackBar.get()
-  expect(current).toBeInstanceOf(RootSiblings)
-  expect(queue).toHaveLength(0)
+  SnackBar.show(TITLE, () => {
+    const { current, queue } = SnackBar.get()
+    expect(current).toBeInstanceOf(RootSiblings)
+    expect(queue).toHaveLength(0)
+  })
 })
 
 it('adds Snack item immediately when there is no active item', () => {
   const SnackBar = new SnackBarManager()
 
-  SnackBar.add(TITLE)
-
-  const { current, queue } = SnackBar.get()
-  expect(current).toBeInstanceOf(RootSiblings)
-  expect(queue).toHaveLength(0)
+  SnackBar.add(TITLE, () => {
+    const { current, queue } = SnackBar.get()
+    expect(current).toBeInstanceOf(RootSiblings)
+    expect(queue).toHaveLength(0)
+  })
 })
 
 it('adds Snack item properly when there is an active item', () => {
   const SnackBar = new SnackBarManager()
   const newTitle = 'Making a happier world'
 
-  SnackBar.add(TITLE)
-  SnackBar.add(newTitle)
+  SnackBar.add(TITLE, () => {
+    SnackBar.add(newTitle, () => {
+      const { current, queue } = SnackBar.get()
 
-  const { current, queue } = SnackBar.get()
-
-  expect(current).toBeInstanceOf(RootSiblings)
-  expect(queue).toHaveLength(1)
-  expect(queue[0]).toMatchObject({
-    title: newTitle
+      expect(current).toBeInstanceOf(RootSiblings)
+      expect(queue).toHaveLength(1)
+      expect(queue[0]).toMatchObject({
+        title: newTitle
+      })
+    })
   })
 })
 
-it('should dismiss current item properly', () => {
+it('dismisses current item properly', () => {
   const SnackBar = new SnackBarManager()
 
   SnackBar.add(TITLE, () => {
@@ -52,7 +53,7 @@ it('should dismiss current item properly', () => {
   })
 })
 
-it('should show the next item when dismissing', () => {
+it('shows the next item when dismissing', () => {
   const SnackBar = new SnackBarManager()
   const newTitle = 'Making a happier world'
 

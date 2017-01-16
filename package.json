@@ -1,6 +1,6 @@
 {
   "name": "react-native-snackbar-dialog",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A react native snackbar with dialog options",
   "main": "dist/index.js",
   "scripts": {
