@@ -14,7 +14,11 @@ export default class SnackBarManager {
   }
 
   _setCurrent = (props: SnackItemType, callback?: Function = () => {}): void => {
-    const current = new RootSiblings(<SnackBar {...props} onAutoDismiss={this.dismiss} />, () => {
+    if (!('onAutoDismiss' in props)) {
+      props.onAutoDismiss = this.dismiss
+    }
+
+    const current = new RootSiblings(<SnackBar {...props} />, () => {
       this.current = current
       callback()
     })
