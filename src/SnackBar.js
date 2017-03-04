@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   },
 
   inlineText: {
+    flex: 1,
     padding: 15,
     fontSize: 16
   },
