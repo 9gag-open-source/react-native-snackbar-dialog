@@ -18,9 +18,10 @@ export default class SnackBarManager {
       props.onAutoDismiss = this.dismiss
     }
 
-    const current = new RootSiblings(<SnackBar {...props} />)
-    this.current = current
-    callback()
+    const current = new RootSiblings(<SnackBar {...props} />, () => {
+      this.current = current
+      callback()
+    })
   }
 
   _removeCurrent = (callback?: Function = () => {}): void => {
@@ -91,15 +92,7 @@ export default class SnackBarManager {
 
   _isItemAlreadyExistById = (
     props
-  ): void => {
-    if (props.id && this.queue.length > 0) {
-      for (let i = 0; i < this.queue.length; i++) {
-        if (this.queue[i].id === props.id) {
-          console.debug('SnackBarManager', 'Item ID already exists, skip adding!')
-          return true
-        }
-      }
-    }
-    return false
+  ): boolean => {
+    return props.id && this.queue.find(item => item.id === props.id)
   }
 }
