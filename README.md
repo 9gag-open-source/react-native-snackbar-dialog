@@ -55,6 +55,7 @@ A SnackBar dialog with separated row action button display.
 ```javascript
 SnackBar.show('Making the world happier', {
   confirmText: 'Learn more',
+  id: 'CUSTOM_ID', // Custom ID to avoid duplicated items being added to the queue, which in turn to be shown multiple time
   onConfirm: () => {
     console.log('Thank you')
     SnackBar.dismiss()
