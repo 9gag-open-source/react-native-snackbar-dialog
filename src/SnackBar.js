@@ -35,11 +35,13 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    padding: 24,
+    padding: 15,
     fontSize: 16
   },
 
   inlineText: {
+    flex: 1,
+    padding: 15,
     fontSize: 16
   },
 
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
 
   inlineRow: {
     flexDirection: 'row',
+    alignItems:'center',
     justifyContent: 'space-between',
     padding: 18
   },
