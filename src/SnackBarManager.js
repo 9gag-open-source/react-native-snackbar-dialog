@@ -67,6 +67,9 @@ export default class SnackBarManager {
     const props = { title, ...options }
 
     if (this.current) {
+      if (this._isItemAlreadyExistById(props)) {
+        return
+      }
       this.queue.unshift(props)
       callback()
       return
@@ -85,5 +88,11 @@ export default class SnackBarManager {
       const current = this.queue.shift()
       this._setCurrent(current, callback)
     })
+  }
+
+  _isItemAlreadyExistById = (
+    props
+  ): boolean => {
+    return props.id && this.queue.find(item => item.id === props.id)
   }
 }

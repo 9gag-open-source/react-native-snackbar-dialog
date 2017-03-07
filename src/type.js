@@ -2,6 +2,7 @@
 
 export type SnackItemType = {
   title: string,
+  id?: string, // Once ID is specified, duplicated item won't be added to the queue
 
   // Button
   confirmText?: string,
