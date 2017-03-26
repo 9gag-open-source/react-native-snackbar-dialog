@@ -68,7 +68,7 @@ SnackBar.show('Making the world happier', {
 })
 ```
 
-A SnackBar with confirgurable style.
+A SnackBar with configurable style.
 ```javascript
 SnackBar.show('Making the world happier', {
   style: { marginBottom: 20 },
