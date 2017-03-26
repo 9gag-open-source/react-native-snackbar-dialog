@@ -122,3 +122,41 @@ it('renders SnackBar styles properly', () => {
   expect(buttonWrapper.text()).toBe('<Text />')
   expect([...buttonWrapper.props().style].pop()).toMatchObject({ color: 'blue' })
 })
+
+it('renders SnackBar styles properly on top position', () => {
+  const wrapper = shallow(
+    <SnackBar
+      title='Making the world happier'
+      style={{ marginBottom: 20 }}
+      backgroundColor='white'
+      textColor='yellow'
+      confirmText='Learn more'
+      buttonColor='blue'
+      position='top'
+    />
+  )
+
+  expect(wrapper.text()).toBe('<AnimatedComponent />')
+  // backgroundColor='white'
+  const [originalStyle, ...wrapperStyles] = [...wrapper.props().style]
+  expect(originalStyle.position).toBe('absolute')
+  expect(originalStyle.top).toBe(0)
+  expect(wrapperStyles).toHaveLength(2)
+  expect(wrapperStyles.shift().backgroundColor).toBe('white')
+  expect(wrapperStyles.shift()).toMatchObject({ marginBottom: 20 })
+
+  const inlineWrapper = wrapper.children()
+  expect(inlineWrapper.text()).toBe('<View />')
+  expect(inlineWrapper.children()).toHaveLength(2)
+
+  // textColor='yellow'
+  const titleWrapper = inlineWrapper.children().first()
+  expect(titleWrapper).toHaveLength(1)
+  expect(titleWrapper.text()).toBe('<Text />')
+  expect([...titleWrapper.props().style].pop()).toMatchObject({ color: 'yellow' })
+
+  // buttonColor='blue'
+  const buttonWrapper = inlineWrapper.children().last().children()
+  expect(buttonWrapper.text()).toBe('<Text />')
+  expect([...buttonWrapper.props().style].pop()).toMatchObject({ color: 'blue' })
+})

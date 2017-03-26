@@ -17,7 +17,10 @@ import {
 
 const DEFAULT_DURATION: number = 5000
 const DEFAULT_FADEOUT_DURATION: number = 250
-const INITIAL_POSITION: number = -180
+const INITIAL_POSITION_BOTTOM: number = -180
+const INITIAL_POSITION_TOP: number = 0
+const TO_POSITION_BOTTOM: number = 180
+const TO_POSITION_TOP: number = -360
 
 const STYLE_BANNER_COLOR: string = '#000000'
 const TEXT_COLOR_ACCENT: string = '#0088ff'
@@ -27,10 +30,17 @@ const TIMEOUT_ID: string = 'snackBar'
 const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  container: {
+  containerBottom: {
     flex: 1,
     position: 'absolute',
-    bottom: INITIAL_POSITION,
+    bottom: INITIAL_POSITION_BOTTOM,
+    width
+  },
+
+  containerTop: {
+    flex: 1,
+    position: 'absolute',
+    top: INITIAL_POSITION_TOP,
     width
   },
 
@@ -65,7 +75,7 @@ const styles = StyleSheet.create({
 
   inlineRow: {
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: 18
   },
@@ -77,7 +87,8 @@ const styles = StyleSheet.create({
 
 export default class SnackBar extends Component {
   state: {
-    transformOffsetY: any,
+    transformOffsetYTop: any,
+    transformOffsetYBottom: any,
     transformOpacity: any
   }
 
@@ -98,14 +109,16 @@ export default class SnackBar extends Component {
     style: {},
     backgroundColor: STYLE_BANNER_COLOR,
     buttonColor: TEXT_COLOR_ACCENT,
-    textColor: 'white'
+    textColor: 'white',
+    position: 'bottom'
   }
 
   constructor (props: SnackItemType) {
     super(props)
 
     this.state = {
-      transformOffsetY: new Animated.Value(0),
+      transformOffsetYTop: new Animated.Value(-180),
+      transformOffsetYBottom: new Animated.Value(0),
       transformOpacity: new Animated.Value(0)
     }
   }
@@ -123,25 +136,36 @@ export default class SnackBar extends Component {
   show = () => {
     const {
       transformOpacity,
-      transformOffsetY
+      transformOffsetYTop,
+      transformOffsetYBottom
     } = this.state
 
     const {
       fadeOutDuration,
       isStatic,
-      duration
+      duration,
+      position
     } = this.props
+
+    const initialPosition = position === 'top'
+      ? INITIAL_POSITION_TOP
+      : INITIAL_POSITION_BOTTOM
+    const transformOffsetY = position === 'top'
+      ? transformOffsetYTop
+      : transformOffsetYBottom
 
     Animated.parallel([
       Animated.timing(transformOpacity, {
         toValue: 1,
         duration: fadeOutDuration,
-        easing: Easing.inOut(Easing.quad)
+        easing: Easing.inOut(Easing.quad),
+        useNativeDriver: true
       }),
       Animated.timing(transformOffsetY, {
-        toValue: INITIAL_POSITION,
+        toValue: initialPosition,
         duration: fadeOutDuration,
-        easing: Easing.inOut(Easing.quad)
+        easing: Easing.inOut(Easing.quad),
+        useNativeDriver: true
       })
     ]).start(() => {
       if (isStatic) {
@@ -159,25 +183,35 @@ export default class SnackBar extends Component {
   hide = () => {
     const {
       transformOpacity,
-      transformOffsetY
+      transformOffsetYTop,
+      transformOffsetYBottom
     } = this.state
 
     const {
       fadeOutDuration,
-      onAutoDismiss
+      onAutoDismiss,
+      position
     } = this.props
+
+    const transformOffsetY = position === 'top'
+      ? transformOffsetYTop
+      : transformOffsetYBottom
+    const toPosition = position === 'top'
+      ? TO_POSITION_TOP
+      : TO_POSITION_BOTTOM
 
     Animated.parallel([
       Animated.timing(transformOpacity, {
         toValue: 0,
         duration: fadeOutDuration,
-        easing: Easing.inOut(Easing.quad)
-
+        easing: Easing.inOut(Easing.quad),
+        useNativeDriver: true
       }),
       Animated.timing(transformOffsetY, {
-        toValue: INITIAL_POSITION * -1,
+        toValue: toPosition,
         easing: Easing.inOut(Easing.quad),
-        duration: fadeOutDuration
+        duration: fadeOutDuration,
+        useNativeDriver: true
       })
     ]).start(() => { onAutoDismiss && onAutoDismiss() })
   }
@@ -231,15 +265,19 @@ export default class SnackBar extends Component {
   }
 
   render () {
-    const { style, backgroundColor } = this.props
+    const { style, backgroundColor, position } = this.props
 
+    const isTop = position === 'top'
+    const transformOffsetY = isTop
+      ? this.state.transformOffsetYTop
+      : this.state.transformOffsetYBottom
     return (
       <Animated.View
         style={[
-          styles.container,
+          isTop && styles.containerTop || !isTop && styles.containerBottom,
           {
             opacity: this.state.transformOpacity,
-            transform: [{ translateY: this.state.transformOffsetY }],
+            transform: [{ translateY: transformOffsetY }],
             backgroundColor
           },
           style
