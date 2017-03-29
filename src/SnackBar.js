@@ -232,10 +232,10 @@ export default class SnackBar extends Component {
   }
 
   render () {
-    const { style, backgroundColor, isStatic } = this.props
+    const { style, backgroundColor, tapToClose } = this.props
 
     return (
-      <TouchableWithoutFeedback onPress={() => !isStatic && this.hide()}>
+      <TouchableWithoutFeedback onPress={() => tapToClose && this.hide()}>
         <Animated.View
           style={[
             styles.container,
