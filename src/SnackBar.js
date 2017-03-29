@@ -12,7 +12,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Easing,
-  InteractionManager
+  InteractionManager,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 const DEFAULT_DURATION: number = 5000
@@ -231,22 +232,24 @@ export default class SnackBar extends Component {
   }
 
   render () {
-    const { style, backgroundColor } = this.props
+    const { style, backgroundColor, isStatic } = this.props
 
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            opacity: this.state.transformOpacity,
-            transform: [{ translateY: this.state.transformOffsetY }],
-            backgroundColor
-          },
-          style
-        ]}
-      >
-        { this.renderContent() }
-      </Animated.View>
+      <TouchableWithoutFeedback onPress={() => !isStatic && this.hide()}>
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              opacity: this.state.transformOpacity,
+              transform: [{ translateY: this.state.transformOffsetY }],
+              backgroundColor
+            },
+            style
+          ]}
+        >
+          { this.renderContent() }
+        </Animated.View>
+      </TouchableWithoutFeedback>
     )
   }
 }
