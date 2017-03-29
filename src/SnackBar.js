@@ -1,8 +1,9 @@
 // @flow
 
 import React, { Component } from 'react'
-import Timer from 'react-native-timer'
 import type { SnackItemType } from './type'
+import TimerMixin from 'react-timer-mixin'
+import reactMixin from 'react-mixin'
 
 import {
   View,
@@ -21,8 +22,6 @@ const INITIAL_POSITION: number = -180
 
 const STYLE_BANNER_COLOR: string = '#000000'
 const TEXT_COLOR_ACCENT: string = '#0088ff'
-
-const TIMEOUT_ID: string = 'snackBar'
 
 const { width } = Dimensions.get('window')
 
@@ -149,7 +148,7 @@ export default class SnackBar extends Component {
       }
 
       InteractionManager.runAfterInteractions(() => {
-        Timer.setTimeout(TIMEOUT_ID, () => {
+        this.setTimeout(() => {
           this.hide()
         }, duration)
       })
@@ -250,3 +249,5 @@ export default class SnackBar extends Component {
     )
   }
 }
+
+reactMixin(SnackBar.prototype, TimerMixin)
