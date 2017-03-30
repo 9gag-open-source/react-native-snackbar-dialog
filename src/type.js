@@ -23,5 +23,6 @@ export type SnackItemType = {
   onAutoDismiss?: Function,
   fadeOutDuration?: number,
   duration?: number,
-  isStatic?: boolean
+  isStatic?: boolean,
+  tapToClose?: boolean
 }
