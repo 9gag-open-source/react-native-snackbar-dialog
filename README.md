@@ -69,13 +69,20 @@ SnackBar.show('Making the world happier', {
 })
 ```
 
-A SnackBar with confirgurable style.
+A SnackBar with configurable style.
 ```javascript
 SnackBar.show('Making the world happier', {
   style: { marginBottom: 20 },
   backgroundColor: 'white',
   buttonColor: 'blue',
   textColor: 'yellow'
+})
+```
+
+A SnackBar at the top.
+```javascript
+SnackBar.show('Making the world happier', {
+  position: 'top' // default to bottom
 })
 ```
 
