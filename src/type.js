@@ -1,5 +1,7 @@
 // @flow
 
+type SnackPosition = 'bottom' | 'top';
+
 export type SnackItemType = {
   title: string,
   id?: string, // Once ID is specified, duplicated item won't be added to the queue
@@ -15,6 +17,7 @@ export type SnackItemType = {
   backgroundColor?: string,
   buttonColor?: string,
   textColor?: string,
+  position?: SnackPosition,
 
   // Behaviour
   onAutoDismiss?: Function,

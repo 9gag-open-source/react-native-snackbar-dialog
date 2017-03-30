@@ -78,6 +78,13 @@ SnackBar.show('Making the world happier', {
 })
 ```
 
+A SnackBar at the top.
+```javascript
+SnackBar.show('Making the world happier', {
+  position: 'top' // default to bottom
+})
+```
+
 A SnackBar with nested actions. Always dismiss current SnackBar before showing a new one using the dismiss callback.
 ```javascript
 SnackBar.add('Making the world happier', {
