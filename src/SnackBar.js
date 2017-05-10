@@ -107,6 +107,7 @@ export default class SnackBar extends Component {
 
     // Styles
     style: {},
+    renderContent: null,
     backgroundColor: STYLE_BANNER_COLOR,
     buttonColor: TEXT_COLOR_ACCENT,
     textColor: 'white',
@@ -235,10 +236,10 @@ export default class SnackBar extends Component {
       cancelText,
       onCancel,
       title,
-      textColor
+      textColor,
     } = this.props
 
-    const titleElement = <Text style={[styles.text, { color: textColor }]}>{title}</Text>
+    const titleElement = <Text style={[styles.text, { color: textColor }, textStyle]}>{title}</Text>
 
     if (confirmText && cancelText) {
       return (
@@ -265,7 +266,7 @@ export default class SnackBar extends Component {
   }
 
   render () {
-    const { style, backgroundColor, position, tapToClose } = this.props
+    const { style, renderContent, backgroundColor, position, tapToClose } = this.props
 
     const isTop = position === 'top'
     const transformOffsetY = isTop
@@ -284,7 +285,7 @@ export default class SnackBar extends Component {
             style
           ]}
         >
-          { this.renderContent() }
+          { renderContent ? renderContent() : this.renderContent() }
         </Animated.View>
       </TouchableWithoutFeedback>
     )
