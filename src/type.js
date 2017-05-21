@@ -24,5 +24,8 @@ export type SnackItemType = {
   fadeOutDuration?: number,
   duration?: number,
   isStatic?: boolean,
-  tapToClose?: boolean
+  tapToClose?: boolean,
+  
+  // Content
+  renderContent?: Function
 }
