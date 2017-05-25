@@ -56,6 +56,7 @@ A SnackBar dialog with separated row action button display.
 SnackBar.show('Making the world happier', {
   confirmText: 'Learn more',
   id: 'CUSTOM_ID', // Custom ID to avoid duplicated items being added to the queue, which in turn to be shown multiple time
+  tapToClose: true, // Default is false, if set, tapping on the SnackBar will dismiss it
   onConfirm: () => {
     console.log('Thank you')
     SnackBar.dismiss()
@@ -68,13 +69,20 @@ SnackBar.show('Making the world happier', {
 })
 ```
 
-A SnackBar with confirgurable style.
+A SnackBar with configurable style.
 ```javascript
 SnackBar.show('Making the world happier', {
   style: { marginBottom: 20 },
   backgroundColor: 'white',
   buttonColor: 'blue',
   textColor: 'yellow'
+})
+```
+
+A SnackBar at the top.
+```javascript
+SnackBar.show('Making the world happier', {
+  position: 'top' // default to bottom
 })
 ```
 
@@ -88,6 +96,13 @@ SnackBar.add('Making the world happier', {
       SnackBar.show('Stay unstoppable!')
     })
   }
+})
+```
+
+A SnackBar with custom content.
+```javascript
+SnackBar.add('Making the world happier', {
+  renderContent: () => <View><Text>Hello!</Text></View>
 })
 ```
 
