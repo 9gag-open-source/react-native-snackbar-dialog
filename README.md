@@ -105,3 +105,27 @@ Callback is optional, but it is suggested to use for flow control.
 
 - `SnackBar.dismiss([callback])`
 <br />Control when and where to dismiss an active item, e.g. `onConfirm` and `onCancel` props action.
+
+## Complete Example
+
+```js
+import React, { Component } from 'react'
+import { Text } from 'react-native'
+import SnackBar from 'react-native-snackbar-dialog'
+
+export default class App extends Component {
+  onPress = () => {
+    SnackBar.show('Making the world happier', { isStatic: true })
+  }
+
+  render() {
+    return (
+      <Text
+        style={{ justifyContent: 'center', alignItems: 'center', padding: 100 }} onPress={this.onPress}
+      >
+        Open SnackBar
+      </Text>
+    )
+  }
+}
+```
