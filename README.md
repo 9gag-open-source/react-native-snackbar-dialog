@@ -99,6 +99,13 @@ SnackBar.add('Making the world happier', {
 })
 ```
 
+A SnackBar with custom content.
+```javascript
+SnackBar.add('Making the world happier', {
+  renderContent: () => <View><Text>Hello!</Text></View>
+})
+```
+
 ## Flow Control
 
 This library handles messages order with peace of mind.
