@@ -32,9 +32,11 @@
       "es2016",
       "react-native"
     ],
-    "plugins": [
-      "flow-react-proptypes"
-    ]
+    "env": {
+      "development": {
+        "plugins": ["flow-react-proptypes"]
+      }
+    }
   },
   "standard": {
     "parser": "babel-eslint",
@@ -49,30 +51,34 @@
     "unmockedModulePathPatterns": [
       "node_modules/react/",
       "node_modules/enzyme/"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|static-container)"
     ]
   },
   "homepage": "https://github.com/9gag-open-source/react-native-snackbar-dialog#readme",
   "dependencies": {
     "babel-cli": "^6.18.0",
-    "babel-plugin-flow-react-proptypes": "^0.19.0",
+    "babel-plugin-flow-react-proptypes": "^2.2.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-react-native": "^1.9.1",
+    "prop-types": "^15.5.10",
+    "react-mixin": "^3.0.0",
     "react-native-root-siblings": "^1.1.2",
     "react-timer-mixin": "^0.13.3",
-    "react-mixin": "^2.0.2",
     "rimraf": "^2.5.4"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "babel-jest": "^18.0.0",
+    "babel-jest": "^20.0.0",
     "enzyme": "^2.7.0",
-    "flow-bin": "^0.36.0",
-    "jest": "^18.1.0",
+    "flow-bin": "^0.46.0",
+    "jest": "^20.0.0",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-native": "^0.40.0",
+    "react-native": "^0.42.0",
     "react-test-renderer": "^15.4.2",
-    "standard": "^8.6.0"
+    "standard": "^10.0.0"
   }
 }
