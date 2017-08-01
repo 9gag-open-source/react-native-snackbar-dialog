@@ -1,7 +1,7 @@
 {
-  "name": "react-native-snackbar-dialog",
-  "version": "1.3.0",
-  "description": "A react native snackbar with dialog options",
+  "name": "react-native-snackbar-dialog-options",
+  "version": "0.0.1",
+  "description": "A react native snackbar IOS / ANDROID",
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
@@ -15,17 +15,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/9gag-open-source/react-native-snackbar-dialog.git"
+    "url": "git+https://github.com/vagnerSl/react-native-snackbar-dialog-options.git"
   },
   "keywords": [
     "snackbar",
     "react",
-    "react-native"
+    "react-native",
+    "options"
   ],
-  "author": "9gag Inc",
+  "author": "9gag Inc and Vagner Araujo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/9gag-open-source/react-native-snackbar-dialog/issues"
+    "url": "https://github.com/vagnerSl/react-native-snackbar-dialog-options/issues"
   },
   "babel": {
     "presets": [
@@ -56,7 +57,7 @@
       "node_modules/(?!react-native|static-container)"
     ]
   },
-  "homepage": "https://github.com/9gag-open-source/react-native-snackbar-dialog#readme",
+  "homepage": "https://github.com/vagnerSl/react-native-snackbar-dialog-options#readme",
   "dependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-flow-react-proptypes": "^2.2.0",
