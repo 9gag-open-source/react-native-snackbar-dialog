@@ -237,6 +237,7 @@ export default class SnackBar extends Component {
       onCancel,
       title,
       textColor,
+      textStyle
     } = this.props
 
     const titleElement = <Text style={[styles.text, { color: textColor }, textStyle]}>{title}</Text>
