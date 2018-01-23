@@ -61,12 +61,12 @@
   "homepage": "https://github.com/9gag-open-source/react-native-snackbar-dialog#readme",
   "dependencies": {
     "babel-cli": "^6.18.0",
-    "babel-plugin-flow-react-proptypes": "^2.2.0",
+    "babel-plugin-flow-react-proptypes": "^12.1.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-react-native": "^1.9.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.0",
     "react-mixin": "^3.0.0",
-    "react-native-root-siblings": "^1.1.2",
+    "react-native-root-siblings": "^2.2.0",
     "react-timer-mixin": "^0.13.3",
     "rimraf": "^2.5.4"
   },
