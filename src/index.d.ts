@@ -38,6 +38,6 @@ interface SnackBarManager {
   dismiss: (callback?: () => void) => void;
 }
 
-const SnackBarManager: SnackBarManager;
+declare const SnackBarManager: SnackBarManager;
 
 export default SnackBarManager;
