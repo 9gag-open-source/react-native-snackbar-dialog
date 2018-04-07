@@ -14,6 +14,7 @@ export type SnackItemType = {
 
   // Style
   style?: Object,
+  textStyle?: Object,
   backgroundColor?: string,
   buttonColor?: string,
   textColor?: string,
@@ -25,7 +26,7 @@ export type SnackItemType = {
   duration?: number,
   isStatic?: boolean,
   tapToClose?: boolean,
-  
+
   // Content
   renderContent?: Function
 }
