@@ -3,8 +3,8 @@ import { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
 
 type SnackPosition = 'bottom' | 'top';
 
-export interface SnackItemType {
-  title: string;
+export interface SnackBarOptions {
+  title?: string;
   id?: string;
 
   // Button
@@ -33,11 +33,8 @@ export interface SnackItemType {
 }
 
 interface SnackBarManager {
-  current: SnackItemType | null;
-  queue: SnackItemType[];
-
-  add: (title: string, options?: SnackItemType, callback?: () => void) => void;
-  show: (title: string, options?: SnackItemType, callback?: () => void) => void;
+  add: (title: string, options?: SnackBarOptions, callback?: () => void) => void;
+  show: (title: string, options?: SnackBarOptions, callback?: () => void) => void;
   dismiss: (callback?: () => void) => void;
 }
 
