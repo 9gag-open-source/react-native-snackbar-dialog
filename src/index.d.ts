@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { GestureResponderEvent, StyleProp, ViewStyle } from 'react-native';
+import { GestureResponderEvent, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 type SnackPosition = 'bottom' | 'top';
 
@@ -15,7 +15,7 @@ export interface SnackBarOptions {
 
   // Style
   style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   backgroundColor?: string;
   buttonColor?: string;
   textColor?: string;
