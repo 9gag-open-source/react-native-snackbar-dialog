@@ -71,6 +71,7 @@
     "rimraf": "^2.5.4"
   },
   "devDependencies": {
+    "@types/react-native": "^0.52.24",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^20.0.0",
     "enzyme": "^2.7.0",
