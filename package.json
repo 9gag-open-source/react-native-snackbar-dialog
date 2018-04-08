@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "description": "A react native snackbar with dialog options",
   "main": "dist/index.js",
-  "types": "src/index.d.ts",
+  "types": "./index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "clean": "rimraf dist",
