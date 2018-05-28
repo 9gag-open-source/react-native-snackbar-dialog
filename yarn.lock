@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@types/react-native@^0.52.24":
+  version "0.52.24"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.52.24.tgz#31b4eb0f6422f53538332f0bac41a6dde9a26df0"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*":
+  version "16.3.5"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.5.tgz#bd3b21285602ea7cadb4b9e0d9711d96fd5692cc"
+  dependencies:
+    csstype "^2.0.0"
+
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -1338,6 +1350,10 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-0.2.37.tgz#541097234cb2513c83ceed3acddc27ff27987d54"
   dependencies:
     cssom "0.3.x"
+
+csstype@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.1.1.tgz#37b01a7a9958ef0b88167ff6678deccd732e0ae2"
 
 csurf@~1.8.3:
   version "1.8.3"
