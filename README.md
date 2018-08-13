@@ -1,3 +1,7 @@
+# DEPRECATED
+This repository is not maintained anymore
+Alternative: https://github.com/cooperka/react-native-snackbar
+
 # react-native-snackbar-dialog
 
 A React Native SnackBar component with configurable dialog. Pull Requests are welcomed.
